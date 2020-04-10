@@ -19,9 +19,9 @@
       <bpmn:lane id="Lane_0xhfogf">
         <bpmn:flowNodeRef>Event_10r256h</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0hpqw93</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_0cqu0zr</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0u8hd4w</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1skaq9z</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0cqu0zr</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="Event_10r256h" name="Process&#10;started">
@@ -32,9 +32,6 @@
       <bpmn:outgoing>Flow_1vp6uui</bpmn:outgoing>
       <bpmn:outgoing>Flow_0lfcszh</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="Event_0cqu0zr" name="Ended with no lead">
-      <bpmn:incoming>Flow_1vp6uui</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1svtiob" sourceRef="Event_10r256h" targetRef="Activity_1skaq9z" />
     <bpmn:sequenceFlow id="Flow_0lfcszh" name="Yes" sourceRef="Gateway_0hpqw93" targetRef="Event_0u8hd4w" />
     <bpmn:sequenceFlow id="Flow_0zogc7a" sourceRef="Activity_1skaq9z" targetRef="Gateway_0hpqw93" />
@@ -51,6 +48,9 @@
       </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:dataStoreReference id="Flow_1tngell" name="CRM" />
+    <bpmn:endEvent id="Event_0cqu0zr" name="Ended with no lead">
+      <bpmn:incoming>Flow_1vp6uui</bpmn:incoming>
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmn:process id="Process_04bj3y1" isExecutable="false">
     <bpmn:exclusiveGateway id="Gateway_0cg275r" name="Test drive request?">
@@ -63,6 +63,9 @@
       <bpmn:incoming>Flow_19ctwti</bpmn:incoming>
       <bpmn:incoming>Flow_000wakz</bpmn:incoming>
       <bpmn:outgoing>Flow_1pewi4i</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1046b3c">
+        <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:exclusiveGateway id="Gateway_0hwq1jh" name="Test drive?">
       <bpmn:incoming>Flow_02rwgf2</bpmn:incoming>
@@ -81,11 +84,9 @@
       <bpmn:incoming>Flow_03llmni</bpmn:incoming>
       <bpmn:incoming>Flow_1bk9zsc</bpmn:incoming>
       <bpmn:outgoing>Flow_03legve</bpmn:outgoing>
-      <bpmn:property id="Property_1ig6lgd" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0kc71z7">
-        <bpmn:sourceRef>Flow_1tngell</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1ig6lgd</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0s9qirl">
+        <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:task id="Activity_04mv792" name="Ask if test drive is desired">
       <bpmn:incoming>Flow_03legve</bpmn:incoming>
@@ -115,6 +116,9 @@
     <bpmn:task id="Activity_087nj1e" name="Perform face recognition authentication">
       <bpmn:incoming>Flow_1qe0b5o</bpmn:incoming>
       <bpmn:outgoing>Flow_1k6rxl2</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0nmndh3">
+        <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:task id="Activity_0ugqjp8" name="Car delivery">
       <bpmn:incoming>Flow_1k6rxl2</bpmn:incoming>
@@ -147,6 +151,9 @@
         <bpmn:sourceRef>Flow_1tngell</bpmn:sourceRef>
         <bpmn:targetRef>Property_1pqs1hg</bpmn:targetRef>
       </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_16ilnkz">
+        <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0ox86ma" sourceRef="Activity_1jng8j1" targetRef="Activity_1el3z5w" />
     <bpmn:sequenceFlow id="Flow_1l6cxsj" sourceRef="Event_0i8f0em" targetRef="Activity_1jng8j1" />
@@ -166,9 +173,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1vp6uui_di" bpmnElement="Flow_1vp6uui" bioc:stroke="rgb(229, 57, 53)" bioc:fill="rgb(255, 205, 210)">
         <di:waypoint x="910" y="602" />
-        <di:waypoint x="910" y="704" />
+        <di:waypoint x="910" y="672" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="918" y="619" width="15" height="14" />
+          <dc:Bounds x="918" y="611" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0zogc7a_di" bpmnElement="Flow_0zogc7a">
@@ -198,12 +205,6 @@
           <dc:Bounds x="873" y="540" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0cqu0zr_di" bpmnElement="Event_0cqu0zr">
-        <dc:Bounds x="892" y="704" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="876" y="747" width="70" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0u8hd4w_di" bpmnElement="Event_0u8hd4w">
         <dc:Bounds x="1012" y="559" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -214,6 +215,12 @@
         <dc:Bounds x="685" y="735" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="617" y="750" width="26" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0cqu0zr_di" bpmnElement="Event_0cqu0zr">
+        <dc:Bounds x="892" y="672" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="876" y="715" width="70" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0nz8sxq_di" bpmnElement="Participant_0nz8sxq" isHorizontal="true">
@@ -434,11 +441,27 @@
         <di:waypoint x="1688" y="140" />
         <di:waypoint x="1688" y="1060" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataInputAssociation_0kc71z7_di" bpmnElement="DataInputAssociation_0kc71z7">
-        <di:waypoint x="710" y="785" />
-        <di:waypoint x="710" y="1000" />
-        <di:waypoint x="1498" y="1000" />
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0s9qirl_di" bpmnElement="DataOutputAssociation_0s9qirl">
         <di:waypoint x="1498" y="1060" />
+        <di:waypoint x="1498" y="760" />
+        <di:waypoint x="735" y="760" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_16ilnkz_di" bpmnElement="DataOutputAssociation_16ilnkz">
+        <di:waypoint x="1118" y="1060" />
+        <di:waypoint x="1118" y="1000" />
+        <di:waypoint x="710" y="1000" />
+        <di:waypoint x="710" y="785" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1046b3c_di" bpmnElement="DataOutputAssociation_1046b3c">
+        <di:waypoint x="1956" y="1060" />
+        <di:waypoint x="1956" y="1000" />
+        <di:waypoint x="705" y="1000" />
+        <di:waypoint x="705" y="785" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0nmndh3_di" bpmnElement="DataOutputAssociation_0nmndh3">
+        <di:waypoint x="2340" y="1060" />
+        <di:waypoint x="2340" y="750" />
+        <di:waypoint x="735" y="765" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

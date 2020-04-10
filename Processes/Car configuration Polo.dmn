@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_0is3i3l" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
-  <decision id="Decision_0p7gkj7" name="Car Configutarion Polo">
+  <decision id="Decision_0p7gkj7" name="Car Configutarion: Polo">
     <decisionTable id="decisionTable_1">
       <input id="input_1" label="Engine Fit">
         <inputExpression id="inputExpression_1" typeRef="string">
           <text></text>
         </inputExpression>
+        <inputValues id="UnaryTests_0py9e0i">
+          <text>"1.0 MPI EVO 5-speed","1.0 TSI 5-speed"</text>
+        </inputValues>
       </input>
       <input id="InputClause_15fq7b2" label="Special equipment">
         <inputExpression id="LiteralExpression_1t4308h" typeRef="string">
           <text></text>
         </inputExpression>
+        <inputValues id="UnaryTests_0xemtbx">
+          <text>"Cool &amp; Connect","Driving Comfort","Exterior Without Model name","Interior Front center armrest","Security: Cruise control system","Security: Multifunction leather steering wheel","Security: Rear seat bench and backrest folded","Function: A/C Climatronic","Function:A/C Climatic","Function: Light and sight","Function: Plus muntifonctional","Function:Fog lights","Function:Parking distance control","Function: Winter package","Multimedia: App Connect","Multimedia: Discover Media Navigation"</text>
+        </inputValues>
       </input>
       <input id="InputClause_04erm1u" label="Interior">
         <inputExpression id="LiteralExpression_18e95gb" typeRef="string">
@@ -28,6 +34,26 @@
         </inputExpression>
       </input>
       <output id="output_1" typeRef="string" />
+      <rule id="DecisionRule_0cg09hy">
+        <inputEntry id="UnaryTests_00hjbcb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r21z8t">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0p6ioer">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ejhv8f">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0snegya">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1q9nx10">
+          <text></text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
 </definitions>
