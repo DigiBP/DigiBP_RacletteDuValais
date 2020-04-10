@@ -81,6 +81,11 @@
       <bpmn:incoming>Flow_03llmni</bpmn:incoming>
       <bpmn:incoming>Flow_1bk9zsc</bpmn:incoming>
       <bpmn:outgoing>Flow_03legve</bpmn:outgoing>
+      <bpmn:property id="Property_1ig6lgd" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0kc71z7">
+        <bpmn:sourceRef>Flow_1tngell</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1ig6lgd</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
     </bpmn:task>
     <bpmn:task id="Activity_04mv792" name="Ask if test drive is desired">
       <bpmn:incoming>Flow_03legve</bpmn:incoming>
@@ -389,7 +394,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataInputAssociation_1dfodvk_di" bpmnElement="DataInputAssociation_1dfodvk">
         <di:waypoint x="710" y="785" />
-        <di:waypoint x="710" y="990" />
+        <di:waypoint x="710" y="1000" />
         <di:waypoint x="1118" y="1000" />
         <di:waypoint x="1118" y="1060" />
       </bpmndi:BPMNEdge>
@@ -428,6 +433,12 @@
       <bpmndi:BPMNEdge id="Flow_1vi0ac3_di" bpmnElement="Flow_1vi0ac3">
         <di:waypoint x="1688" y="140" />
         <di:waypoint x="1688" y="1060" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0kc71z7_di" bpmnElement="DataInputAssociation_0kc71z7">
+        <di:waypoint x="710" y="785" />
+        <di:waypoint x="710" y="1000" />
+        <di:waypoint x="1498" y="1000" />
+        <di:waypoint x="1498" y="1060" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
