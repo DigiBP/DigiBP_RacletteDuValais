@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_0is3i3l" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <decision id="Decision_0p7gkj7" name="Car Configutarion Polo">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Engine Fit">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_15fq7b2" label="Special equipment">
+        <inputExpression id="LiteralExpression_1t4308h" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_04erm1u" label="Interior">
+        <inputExpression id="LiteralExpression_18e95gb" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0yek2bl" label="Color">
+        <inputExpression id="LiteralExpression_1vrmb7l" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1hu6co9" label="Rims">
+        <inputExpression id="LiteralExpression_0dehk2c" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" typeRef="string" />
+    </decisionTable>
+  </decision>
+</definitions>
