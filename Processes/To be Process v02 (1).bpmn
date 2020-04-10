@@ -50,7 +50,7 @@
         <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:task>
-    <bpmn:dataStoreReference id="Flow_1tngell" />
+    <bpmn:dataStoreReference id="Flow_1tngell" name="CRM" />
   </bpmn:process>
   <bpmn:process id="Process_04bj3y1" isExecutable="false">
     <bpmn:exclusiveGateway id="Gateway_0cg275r" name="Test drive request?">
@@ -207,6 +207,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Flow_1tngell_di" bpmnElement="Flow_1tngell">
         <dc:Bounds x="685" y="735" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="617" y="750" width="26" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0nz8sxq_di" bpmnElement="Participant_0nz8sxq" isHorizontal="true">
         <dc:Bounds x="158" y="830" width="2534" height="480" />
