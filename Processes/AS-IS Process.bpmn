@@ -36,7 +36,7 @@
         <bpmn:flowNodeRef>Event_1wychoj</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:task id="Activity_12danw6" name="show car model page">
+    <bpmn:task id="Activity_12danw6" name="Open car model page">
       <bpmn:incoming>Flow_0i6lbji</bpmn:incoming>
       <bpmn:outgoing>Flow_1bkyto0</bpmn:outgoing>
       <bpmn:property id="Property_03c9wb4" name="__targetRef_placeholder" />
@@ -58,7 +58,7 @@
       <bpmn:incoming>Flow_1dbfc9t</bpmn:incoming>
       <bpmn:outgoing>Flow_1dg7zq0</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:startEvent id="Event_0863noa" name="Process&#10;started">
+    <bpmn:startEvent id="Event_0863noa" name="Customer opens landing page">
       <bpmn:outgoing>Flow_0i6lbji</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:task id="Activity_1apcsl1" name="Fill form">
@@ -331,7 +331,7 @@
       <bpmndi:BPMNShape id="Event_0863noa_di" bpmnElement="Event_0863noa">
         <dc:Bounds x="212" y="612" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="210" y="648" width="40" height="27" />
+          <dc:Bounds x="190" y="648" width="81" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1apcsl1_di" bpmnElement="Activity_1apcsl1">
