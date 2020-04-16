@@ -4,7 +4,7 @@
     <extensionElements>
       <biodi:bounds x="150" y="150" width="180" height="80" />
     </extensionElements>
-    <decisionTable id="decisionTable_1">
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
       <input id="input_1" label="Type of Travelling">
         <inputExpression id="inputExpression_1" typeRef="string">
           <text>Typeoftravelling</text>
@@ -142,7 +142,7 @@
           <text>"Family &gt; 4"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1d44l4p">
-          <text>20000</text>
+          <text>&lt;20000</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_08qnevj">
           <text>High</text>
@@ -167,6 +167,27 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_048kxfa">
           <text>Medium-High</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_15nzr31">
+        <description>"Offer Model: Polo"</description>
+        <inputEntry id="UnaryTests_0vn4n96">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tuvomq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r6u5to">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uqk4hg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r9o8v6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19dycn0">
+          <text>Low</text>
         </outputEntry>
       </rule>
     </decisionTable>
