@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_0vswsvv" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
-  <decision id="Decision_0owlpnj" name="Detailed Requirement Analysis">
+  <decision id="RequirementAnalysis" name="Requirement Analysis">
     <extensionElements>
       <biodi:bounds x="150" y="150" width="180" height="80" />
     </extensionElements>
@@ -344,6 +344,36 @@
         </outputEntry>
         <outputEntry id="LiteralExpression_0o7hmii">
           <text>15</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_03znuqt">
+        <description>"Offer Model: Golf"</description>
+        <inputEntry id="UnaryTests_00m35zw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0b030g9">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nhlzuh">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07i2e5c">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_050az7e">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0prf4q4">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1vn0w4r">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1p0h4gz">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0xfn1l3">
+          <text></text>
         </outputEntry>
       </rule>
     </decisionTable>
