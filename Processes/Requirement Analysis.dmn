@@ -2,20 +2,20 @@
 <definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_0vswsvv" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
   <decision id="DetailedRequirementAnalysis" name="Detailed Requirement Analysis">
     <extensionElements>
-      <biodi:bounds x="150" y="150" width="180" height="80" />
+      <biodi:bounds x="150" y="160" width="180" height="80" />
     </extensionElements>
     <decisionTable id="decisionTable_1" hitPolicy="FIRST">
       <input id="input_1" label="Type of Travelling">
         <inputExpression id="inputExpression_1" typeRef="string">
-          <text>Typeoftravelling</text>
+          <text>TypeOfTravelling</text>
         </inputExpression>
         <inputValues id="UnaryTests_13rhubq">
           <text>"Long distance","Highway","City","Short distance","Offroad"</text>
         </inputValues>
       </input>
-      <input id="InputClause_1cycb7l" label="Special requirements">
+      <input id="InputClause_1cycb7l" label="Special Requirements">
         <inputExpression id="LiteralExpression_1d6gnnf" typeRef="string">
-          <text>Specialrequirements</text>
+          <text>SpecialRequirements</text>
         </inputExpression>
         <inputValues id="UnaryTests_1tm2tsp">
           <text>"None","Bad road conditions","Trailer loads"</text>
@@ -23,7 +23,7 @@
       </input>
       <input id="InputClause_0in0zxb" label="Purchasing Motive">
         <inputExpression id="LiteralExpression_0xbapnh" typeRef="string">
-          <text>Purchasingmotive</text>
+          <text>PurchasingMotive</text>
         </inputExpression>
         <inputValues id="UnaryTests_0z87vry">
           <text>"Thrift","Safety","Sportive driving","Prestige","Spacious","Environmental friendliness"</text>
@@ -39,12 +39,13 @@
       </input>
       <input id="InputClause_1u9c0an" label="Km driven per year">
         <inputExpression id="LiteralExpression_1f0n9tj" typeRef="double">
-          <text>Kmdrivenperyear</text>
+          <text>KmDrivenPerYear</text>
         </inputExpression>
       </input>
-      <output id="output_1" label="Car Model Offering Price range" typeRef="string" />
+      <output id="output_1" label="Car Model Offering Price Range" name="CarModelOfferingPriceRange" typeRef="string" />
+      <output id="OutputClause_0a3ui01" label="Explanation" name="Explanation" typeRef="string" />
       <rule id="DecisionRule_0jpnyu0">
-        <description>"Offer Model: ID.3"</description>
+        <description></description>
         <inputEntry id="UnaryTests_032h10f">
           <text>"Short distance"</text>
         </inputEntry>
@@ -63,9 +64,12 @@
         <outputEntry id="LiteralExpression_0wlcuma">
           <text>Medium-Low</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_1uf7vwz">
+          <text>"Offer Model: ID.3"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_0pjqfg7">
-        <description>"Offer Model: Golf"</description>
+        <description></description>
         <inputEntry id="UnaryTests_1p8crjb">
           <text>"Highway"</text>
         </inputEntry>
@@ -84,9 +88,12 @@
         <outputEntry id="LiteralExpression_1ahxggt">
           <text>Medium</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_0uolv9q">
+          <text>"Offer Model: Golf"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_1nv8ab4">
-        <description>"Offer Model: Polo"</description>
+        <description></description>
         <inputEntry id="UnaryTests_0zms90g">
           <text>"City"</text>
         </inputEntry>
@@ -105,9 +112,12 @@
         <outputEntry id="LiteralExpression_14ebxn8">
           <text>Low</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_0lr20r9">
+          <text>"Offer Model: Polo"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_1b55mzs">
-        <description>"Offer Model Touareg"</description>
+        <description></description>
         <inputEntry id="UnaryTests_12iikkd">
           <text>"Long distance","Offroad"</text>
         </inputEntry>
@@ -126,9 +136,12 @@
         <outputEntry id="LiteralExpression_0pdv8jp">
           <text>High</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_0js0jx9">
+          <text>"Offer Model Touareg"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_05ef1ao">
-        <description>"Offer Model Touareg"</description>
+        <description></description>
         <inputEntry id="UnaryTests_0ls309e">
           <text>"City"</text>
         </inputEntry>
@@ -147,9 +160,12 @@
         <outputEntry id="LiteralExpression_08qnevj">
           <text>High</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_0jt3qbp">
+          <text>"Offer Model Touareg"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_198awhk">
-        <description>"Offer Model: Golf"</description>
+        <description></description>
         <inputEntry id="UnaryTests_0foszb7">
           <text>"Short distance"</text>
         </inputEntry>
@@ -168,9 +184,12 @@
         <outputEntry id="LiteralExpression_048kxfa">
           <text>Medium-High</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_0wmrman">
+          <text>"Offer Model: Golf"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_15nzr31">
-        <description>"Offer Model: Polo"</description>
+        <description></description>
         <inputEntry id="UnaryTests_0vn4n96">
           <text></text>
         </inputEntry>
@@ -188,6 +207,9 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_19dycn0">
           <text>Low</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1qbi5xc">
+          <text>"Offer Model: Polo"</text>
         </outputEntry>
       </rule>
     </decisionTable>
