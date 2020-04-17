@@ -4,37 +4,37 @@
     <bpmn:participant id="Participant_16otr2b" name="VW (AMAG) Page" processRef="Process_10m8cww" />
     <bpmn:participant id="Participant_0nz8sxq" name="Dealer" processRef="Process_04bj3y1" />
     <bpmn:participant id="Participant_0bep4wm" name="Customer" />
-    <bpmn:messageFlow id="MessageFlow_0yufwzu" sourceRef="Participant_0bep4wm" targetRef="Event_10r256h" />
-    <bpmn:messageFlow id="MessageFlow_1telby4" sourceRef="Activity_0ugqjp8" targetRef="Participant_0bep4wm" />
-    <bpmn:messageFlow id="MessageFlow_0uhm7po" sourceRef="Participant_0bep4wm" targetRef="Activity_087nj1e" />
-    <bpmn:messageFlow id="MessageFlow_0sagyow" sourceRef="Activity_087nj1e" targetRef="Participant_0bep4wm" />
-    <bpmn:messageFlow id="MessageFlow_0gm7w54" sourceRef="Event_0u8hd4w" targetRef="Event_0i8f0em" />
-    <bpmn:messageFlow id="MessageFlow_1pcmal7" sourceRef="Activity_0mdsfxk" targetRef="Participant_0bep4wm" />
-    <bpmn:messageFlow id="MessageFlow_0hk56an" sourceRef="Participant_0bep4wm" targetRef="Activity_0mdsfxk" />
-    <bpmn:messageFlow id="Flow_0g85qsh" sourceRef="Activity_04mv792" targetRef="Participant_0bep4wm" />
-    <bpmn:messageFlow id="Flow_1vi0ac3" sourceRef="Participant_0bep4wm" targetRef="Activity_04mv792" />
-    <bpmn:messageFlow id="Flow_0yxo8es" sourceRef="Activity_1dggwfv" targetRef="Participant_0bep4wm" />
-    <bpmn:messageFlow id="Flow_1n7tg78" sourceRef="Participant_0bep4wm" targetRef="Activity_1dggwfv" />
+    <bpmn:messageFlow id="MessageFlow_0yufwzu" sourceRef="Participant_0bep4wm" targetRef="StartEvent_CarWanted" />
+    <bpmn:messageFlow id="MessageFlow_1telby4" sourceRef="Task_DeliverCar" targetRef="Participant_0bep4wm" />
+    <bpmn:messageFlow id="MessageFlow_0uhm7po" sourceRef="Participant_0bep4wm" targetRef="Task_Face_Recognition" />
+    <bpmn:messageFlow id="MessageFlow_0sagyow" sourceRef="Task_Face_Recognition" targetRef="Participant_0bep4wm" />
+    <bpmn:messageFlow id="MessageFlow_0gm7w54" sourceRef="End_Event_SendInfoToDealer" targetRef="IntermediateThrowEvent_0i8f0em" />
+    <bpmn:messageFlow id="MessageFlow_1pcmal7" sourceRef="Task_CreateOffer" targetRef="Participant_0bep4wm" />
+    <bpmn:messageFlow id="MessageFlow_0hk56an" sourceRef="Participant_0bep4wm" targetRef="Task_CreateOffer" />
+    <bpmn:messageFlow id="Flow_0g85qsh" sourceRef="Task_AskIfTestDriveIsDesired" targetRef="Participant_0bep4wm" />
+    <bpmn:messageFlow id="Flow_1vi0ac3" sourceRef="Participant_0bep4wm" targetRef="Task_AskIfTestDriveIsDesired" />
+    <bpmn:messageFlow id="Flow_0yxo8es" sourceRef="TaskAskToUploadDriverLicense" targetRef="Participant_0bep4wm" />
+    <bpmn:messageFlow id="Flow_1n7tg78" sourceRef="Participant_0bep4wm" targetRef="TaskAskToUploadDriverLicense" />
   </bpmn:collaboration>
   <bpmn:process id="Process_10m8cww" isExecutable="true">
     <bpmn:laneSet id="LaneSet_0ugdhxs">
       <bpmn:lane id="Lane_0xhfogf">
-        <bpmn:flowNodeRef>Event_10r256h</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_0hpqw93</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_0u8hd4w</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_CarWanted</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Still_Interested</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Event_SendInfoToDealer</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0cqu0zr</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1skaq9z</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_StartChatbotConversation</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="Event_10r256h" name="Customer opened landing page">
+    <bpmn:startEvent id="StartEvent_CarWanted" name="Car wanted">
       <bpmn:outgoing>Flow_1svtiob</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:exclusiveGateway id="Gateway_0hpqw93" name="Still interested?">
+    <bpmn:exclusiveGateway id="Gateway_Still_Interested" name="Still interested?">
       <bpmn:incoming>Flow_0zogc7a</bpmn:incoming>
       <bpmn:outgoing>Flow_1vp6uui</bpmn:outgoing>
       <bpmn:outgoing>Flow_0lfcszh</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="Event_0u8hd4w">
+    <bpmn:endEvent id="End_Event_SendInfoToDealer">
       <bpmn:incoming>Flow_0lfcszh</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1rsapvj" />
     </bpmn:endEvent>
@@ -42,7 +42,7 @@
     <bpmn:endEvent id="Event_0cqu0zr" name="Ended with no lead">
       <bpmn:incoming>Flow_1vp6uui</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_1skaq9z" name="Start chatbot Conversation">
+    <bpmn:userTask id="Task_StartChatbotConversation" name="Start chatbot Conversation">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="Chatbot1" type="boolean" defaultValue="interested" />
@@ -57,21 +57,21 @@
         <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_1svtiob" sourceRef="Event_10r256h" targetRef="Activity_1skaq9z" />
-    <bpmn:sequenceFlow id="Flow_0zogc7a" sourceRef="Activity_1skaq9z" targetRef="Gateway_0hpqw93" />
-    <bpmn:sequenceFlow id="Flow_0lfcszh" name="Yes" sourceRef="Gateway_0hpqw93" targetRef="Event_0u8hd4w">
+    <bpmn:sequenceFlow id="Flow_1svtiob" sourceRef="StartEvent_CarWanted" targetRef="Task_StartChatbotConversation" />
+    <bpmn:sequenceFlow id="Flow_0zogc7a" sourceRef="Task_StartChatbotConversation" targetRef="Gateway_Still_Interested" />
+    <bpmn:sequenceFlow id="Flow_0lfcszh" name="Yes" sourceRef="Gateway_Still_Interested" targetRef="End_Event_SendInfoToDealer">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${interested=="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1vp6uui" name="No" sourceRef="Gateway_0hpqw93" targetRef="Event_0cqu0zr">
+    <bpmn:sequenceFlow id="Flow_1vp6uui" name="No" sourceRef="Gateway_Still_Interested" targetRef="Event_0cqu0zr">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${interested!="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
   </bpmn:process>
   <bpmn:process id="Process_04bj3y1" isExecutable="false">
-    <bpmn:startEvent id="Event_0i8f0em">
+    <bpmn:startEvent id="IntermediateThrowEvent_0i8f0em">
       <bpmn:outgoing>Flow_1l6cxsj</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1rbb3oi" />
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1jng8j1" name="Assign Lead to salesperson">
+    <bpmn:userTask id="Task_AssignLeadToSalesPerson" name="Assign Lead to salesperson">
       <bpmn:incoming>Flow_1l6cxsj</bpmn:incoming>
       <bpmn:outgoing>Flow_0ox86ma</bpmn:outgoing>
       <bpmn:property id="Property_0eccs45" name="__targetRef_placeholder" />
@@ -83,30 +83,27 @@
         <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_1l6cxsj" sourceRef="Event_0i8f0em" targetRef="Activity_1jng8j1" />
-    <bpmn:sequenceFlow id="Flow_0ox86ma" sourceRef="Activity_1jng8j1" targetRef="Activity_1el3z5w" />
-    <bpmn:exclusiveGateway id="Gateway_0hwq1jh" name="Test drive?">
+    <bpmn:sequenceFlow id="Flow_1l6cxsj" sourceRef="IntermediateThrowEvent_0i8f0em" targetRef="Task_AssignLeadToSalesPerson" />
+    <bpmn:sequenceFlow id="Flow_0ox86ma" sourceRef="Task_AssignLeadToSalesPerson" targetRef="Task_CheckTestDriveRequest" />
+    <bpmn:exclusiveGateway id="Gateway_Testdrive" name="Test drive?">
       <bpmn:incoming>Flow_02rwgf2</bpmn:incoming>
       <bpmn:outgoing>Flow_19ctwti</bpmn:outgoing>
       <bpmn:outgoing>Flow_1ghyzf1</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_0y3ncrf" name="Accept?">
+    <bpmn:exclusiveGateway id="Gateway_OfferAccepted" name="OfferAccepted?">
       <bpmn:incoming>Flow_1pewi4i</bpmn:incoming>
       <bpmn:outgoing>Flow_1qe0b5o</bpmn:outgoing>
       <bpmn:outgoing>Flow_16h4ah4</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_13wmggo" name="New offer?">
+    <bpmn:exclusiveGateway id="Gateway_NewOfferAccepted" name="New offer accepted?">
       <bpmn:incoming>Flow_12m5pha</bpmn:incoming>
       <bpmn:outgoing>Flow_02nn8xg</bpmn:outgoing>
       <bpmn:outgoing>Flow_0efd3dz</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="Event_02mctpg">
-      <bpmn:incoming>Flow_02nn8xg</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:endEvent id="Event_1wocr1d">
       <bpmn:incoming>Flow_1ftahhz</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_0mdsfxk" name="Create Offer">
+    <bpmn:userTask id="Task_CreateOffer" name="Create Offer">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="Firstoffer" type="boolean" defaultValue="offer" />
@@ -120,14 +117,14 @@
       <bpmn:incoming>Flow_000wakz</bpmn:incoming>
       <bpmn:outgoing>Flow_1pewi4i</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0qq9cra" name="Schedule test drive">
+    <bpmn:userTask id="Task_Schedule2TestDrive" name="Schedule test drive">
       <bpmn:incoming>Flow_1ghyzf1</bpmn:incoming>
       <bpmn:outgoing>Flow_000wakz</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_1flt0ql" name="Request  new offer">
+    <bpmn:userTask id="Task_RequestNewOffer" name="Request new offer">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="Newoffer" defaultValue="newoffer" />
+          <camunda:formField id="newoffer" type="boolean" defaultValue="newoffer" />
         </camunda:formData>
         <camunda:inputOutput>
           <camunda:outputParameter name="newoffer">yes</camunda:outputParameter>
@@ -136,61 +133,61 @@
       <bpmn:incoming>Flow_16h4ah4</bpmn:incoming>
       <bpmn:outgoing>Flow_12m5pha</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_087nj1e" name="Perform face recognition authentication">
+    <bpmn:userTask id="Task_Face_Recognition" name="Perform face recognition authentication">
       <bpmn:incoming>Flow_1qe0b5o</bpmn:incoming>
       <bpmn:outgoing>Flow_1k6rxl2</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0nmndh3">
         <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0ugqjp8" name="Car delivery">
+    <bpmn:userTask id="Task_DeliverCar" name="Deliver Car">
       <bpmn:incoming>Flow_1k6rxl2</bpmn:incoming>
       <bpmn:outgoing>Flow_1ftahhz</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_03llmni" name="No" sourceRef="Gateway_0cg275r" targetRef="Activity_07dqz9w">
+    <bpmn:sequenceFlow id="Flow_03llmni" name="No" sourceRef="Gateway_TestDriveRequest" targetRef="Task_ConductDetailedRequirementAnalysis">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${testdrive!="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1dk2h1g" name="Yes" sourceRef="Gateway_0cg275r" targetRef="Activity_0vexv7m">
+    <bpmn:sequenceFlow id="Flow_1dk2h1g" name="Yes" sourceRef="Gateway_TestDriveRequest" targetRef="Task_ScheduleTestDrive">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${testdrive=="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_02rwgf2" sourceRef="Activity_04mv792" targetRef="Gateway_0hwq1jh" />
-    <bpmn:sequenceFlow id="Flow_19ctwti" name="No" sourceRef="Gateway_0hwq1jh" targetRef="Activity_0mdsfxk">
+    <bpmn:sequenceFlow id="Flow_02rwgf2" sourceRef="Task_AskIfTestDriveIsDesired" targetRef="Gateway_Testdrive" />
+    <bpmn:sequenceFlow id="Flow_19ctwti" name="No" sourceRef="Gateway_Testdrive" targetRef="Task_CreateOffer">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${testdrive2!="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1ghyzf1" name="Yes" sourceRef="Gateway_0hwq1jh" targetRef="Activity_0qq9cra">
+    <bpmn:sequenceFlow id="Flow_1ghyzf1" name="Yes" sourceRef="Gateway_Testdrive" targetRef="Task_Schedule2TestDrive">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${testdrive2=="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1pewi4i" sourceRef="Activity_0mdsfxk" targetRef="Gateway_0y3ncrf" />
-    <bpmn:sequenceFlow id="Flow_16h4ah4" name="No" sourceRef="Gateway_0y3ncrf" targetRef="Activity_1flt0ql">
+    <bpmn:sequenceFlow id="Flow_1pewi4i" sourceRef="Task_CreateOffer" targetRef="Gateway_OfferAccepted" />
+    <bpmn:sequenceFlow id="Flow_16h4ah4" name="No" sourceRef="Gateway_OfferAccepted" targetRef="Task_RequestNewOffer">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${offer!="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1qe0b5o" name="Yes" sourceRef="Gateway_0y3ncrf" targetRef="Activity_087nj1e">
+    <bpmn:sequenceFlow id="Flow_1qe0b5o" name="Yes" sourceRef="Gateway_OfferAccepted" targetRef="Task_Face_Recognition">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${offer=="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_12m5pha" sourceRef="Activity_1flt0ql" targetRef="Gateway_13wmggo" />
-    <bpmn:sequenceFlow id="Flow_02nn8xg" name="No" sourceRef="Gateway_13wmggo" targetRef="Event_02mctpg">
+    <bpmn:sequenceFlow id="Flow_12m5pha" sourceRef="Task_RequestNewOffer" targetRef="Gateway_NewOfferAccepted" />
+    <bpmn:sequenceFlow id="Flow_02nn8xg" name="No" sourceRef="Gateway_NewOfferAccepted" targetRef="Event_02mctpg">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${newoffer!="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0efd3dz" name="Yes" sourceRef="Gateway_13wmggo" targetRef="Activity_0mdsfxk">
+    <bpmn:sequenceFlow id="Flow_0efd3dz" name="Yes" sourceRef="Gateway_NewOfferAccepted" targetRef="Task_CreateOffer">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${newoffer=="yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1ftahhz" sourceRef="Activity_0ugqjp8" targetRef="Event_1wocr1d" />
-    <bpmn:sequenceFlow id="Flow_1k6rxl2" sourceRef="Activity_087nj1e" targetRef="Activity_0ugqjp8" />
-    <bpmn:sequenceFlow id="Flow_000wakz" sourceRef="Activity_0qq9cra" targetRef="Activity_0mdsfxk" />
-    <bpmn:sequenceFlow id="Flow_03legve" sourceRef="Activity_07dqz9w" targetRef="Activity_04mv792" />
-    <bpmn:sequenceFlow id="Flow_1bk9zsc" sourceRef="Activity_0vexv7m" targetRef="Activity_07dqz9w" />
-    <bpmn:sequenceFlow id="Flow_05xomgo" sourceRef="Activity_1el3z5w" targetRef="Activity_1dggwfv" />
-    <bpmn:exclusiveGateway id="Gateway_0cg275r" name="Test drive request?">
+    <bpmn:sequenceFlow id="Flow_1ftahhz" sourceRef="Task_DeliverCar" targetRef="Event_1wocr1d" />
+    <bpmn:sequenceFlow id="Flow_1k6rxl2" sourceRef="Task_Face_Recognition" targetRef="Task_DeliverCar" />
+    <bpmn:sequenceFlow id="Flow_000wakz" sourceRef="Task_Schedule2TestDrive" targetRef="Task_CreateOffer" />
+    <bpmn:sequenceFlow id="Flow_03legve" sourceRef="Task_ConductDetailedRequirementAnalysis" targetRef="Task_AskIfTestDriveIsDesired" />
+    <bpmn:sequenceFlow id="Flow_1bk9zsc" sourceRef="Task_ScheduleTestDrive" targetRef="Task_ConductDetailedRequirementAnalysis" />
+    <bpmn:sequenceFlow id="Flow_05xomgo" sourceRef="Task_CheckTestDriveRequest" targetRef="TaskAskToUploadDriverLicense" />
+    <bpmn:exclusiveGateway id="Gateway_TestDriveRequest" name="Test drive request?">
       <bpmn:incoming>Flow_0y4eb4l</bpmn:incoming>
       <bpmn:outgoing>Flow_1dk2h1g</bpmn:outgoing>
       <bpmn:outgoing>Flow_03llmni</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0y4eb4l" sourceRef="Activity_1dggwfv" targetRef="Gateway_0cg275r" />
-    <bpmn:userTask id="Activity_1el3z5w" name="Check Test Drive Request">
+    <bpmn:sequenceFlow id="Flow_0y4eb4l" sourceRef="TaskAskToUploadDriverLicense" targetRef="Gateway_TestDriveRequest" />
+    <bpmn:userTask id="Task_CheckTestDriveRequest" name="Check Test Drive Request">
       <bpmn:incoming>Flow_0ox86ma</bpmn:incoming>
       <bpmn:outgoing>Flow_05xomgo</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_1dggwfv" name="Ask to upload driver license">
+    <bpmn:userTask id="TaskAskToUploadDriverLicense" name="Ask to upload driver license">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="Gol" type="boolean" defaultValue="testdrive" />
@@ -205,11 +202,11 @@
         <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0vexv7m" name="Schedule test drive">
+    <bpmn:userTask id="Task_ScheduleTestDrive" name="Schedule test drive">
       <bpmn:incoming>Flow_1dk2h1g</bpmn:incoming>
       <bpmn:outgoing>Flow_1bk9zsc</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_04mv792" name="Ask if test drive is desired">
+    <bpmn:userTask id="Task_AskIfTestDriveIsDesired" name="Ask if test drive is desired">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="Gol" type="boolean" defaultValue="testdrive2" />
@@ -221,15 +218,17 @@
       <bpmn:incoming>Flow_03legve</bpmn:incoming>
       <bpmn:outgoing>Flow_02rwgf2</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:businessRuleTask id="Activity_07dqz9w" name="Conduct detailed requirement analysis" camunda:resultVariable="decision" camunda:decisionRef="Requirement_Analysis(2)">
+    <bpmn:endEvent id="Event_02mctpg">
+      <bpmn:incoming>Flow_02nn8xg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Task_ConductDetailedRequirementAnalysis" name="Conduct detailed requirement analysis">
       <bpmn:incoming>Flow_03llmni</bpmn:incoming>
       <bpmn:incoming>Flow_1bk9zsc</bpmn:incoming>
       <bpmn:outgoing>Flow_03legve</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0s9qirl">
         <bpmn:targetRef>Flow_1tngell</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
-      <bpmn:multiInstanceLoopCharacteristics />
-    </bpmn:businessRuleTask>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_164x4af">
@@ -261,19 +260,19 @@
         <di:waypoint x="334" y="340" />
         <di:waypoint x="448" y="340" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_10r256h_di" bpmnElement="Event_10r256h">
+      <bpmndi:BPMNShape id="Event_10r256h_di" bpmnElement="StartEvent_CarWanted">
         <dc:Bounds x="298" y="322" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="272" y="358" width="88" height="27" />
+          <dc:Bounds x="288" y="358" width="57" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0hpqw93_di" bpmnElement="Gateway_0hpqw93" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="Gateway_0hpqw93_di" bpmnElement="Gateway_Still_Interested" isMarkerVisible="true">
         <dc:Bounds x="673" y="315" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="661" y="303" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0u8hd4w_di" bpmnElement="Event_0u8hd4w">
+      <bpmndi:BPMNShape id="Event_0u8hd4w_di" bpmnElement="End_Event_SendInfoToDealer">
         <dc:Bounds x="800" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Flow_1tngell_di" bpmnElement="Flow_1tngell">
@@ -288,7 +287,7 @@
           <dc:Bounds x="664" y="478" width="70" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1r68v8m_di" bpmnElement="Activity_1skaq9z">
+      <bpmndi:BPMNShape id="Activity_1r68v8m_di" bpmnElement="Task_StartChatbotConversation">
         <dc:Bounds x="448" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0nz8sxq_di" bpmnElement="Participant_0nz8sxq" isHorizontal="true">
@@ -332,9 +331,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_02nn8xg_di" bpmnElement="Flow_02nn8xg" bioc:stroke="rgb(229, 57, 53)" bioc:fill="rgb(255, 205, 210)">
         <di:waypoint x="2187" y="660" />
-        <di:waypoint x="2254" y="660" />
+        <di:waypoint x="2272" y="660" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2212" y="643" width="15" height="14" />
+          <dc:Bounds x="2221" y="643" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12m5pha_di" bpmnElement="Flow_12m5pha">
@@ -401,70 +400,70 @@
         <di:waypoint x="836" y="880" />
         <di:waypoint x="868" y="880" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0i8f0em_di" bpmnElement="Event_0i8f0em">
+      <bpmndi:BPMNShape id="Event_0i8f0em_di" bpmnElement="IntermediateThrowEvent_0i8f0em">
         <dc:Bounds x="800" y="862" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_19jbpff_di" bpmnElement="Activity_1jng8j1">
+      <bpmndi:BPMNShape id="Activity_19jbpff_di" bpmnElement="Task_AssignLeadToSalesPerson">
         <dc:Bounds x="868" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0hwq1jh_di" bpmnElement="Gateway_0hwq1jh" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="Gateway_0hwq1jh_di" bpmnElement="Gateway_Testdrive" isMarkerVisible="true">
         <dc:Bounds x="1777" y="855" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1775" y="831" width="54" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0y3ncrf_di" bpmnElement="Gateway_0y3ncrf" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="Gateway_0y3ncrf_di" bpmnElement="Gateway_OfferAccepted" isMarkerVisible="true">
         <dc:Bounds x="2137" y="855" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2142" y="915" width="40" height="14" />
+          <dc:Bounds x="2125" y="915" width="77" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_13wmggo_di" bpmnElement="Gateway_13wmggo" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="Gateway_13wmggo_di" bpmnElement="Gateway_NewOfferAccepted" isMarkerVisible="true">
         <dc:Bounds x="2137" y="635" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2136" y="623" width="53" height="14" />
+          <dc:Bounds x="2137" y="606" width="51" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_02mctpg_di" bpmnElement="Event_02mctpg">
-        <dc:Bounds x="2254" y="642" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1wocr1d_di" bpmnElement="Event_1wocr1d">
         <dc:Bounds x="2622" y="862" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0imdd85_di" bpmnElement="Activity_0mdsfxk">
+      <bpmndi:BPMNShape id="Activity_0imdd85_di" bpmnElement="Task_CreateOffer">
         <dc:Bounds x="1936" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1dtrqex_di" bpmnElement="Activity_0qq9cra">
+      <bpmndi:BPMNShape id="Activity_1dtrqex_di" bpmnElement="Task_Schedule2TestDrive">
         <dc:Bounds x="1936" y="950" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0elrhj9_di" bpmnElement="Activity_1flt0ql">
+      <bpmndi:BPMNShape id="Activity_0elrhj9_di" bpmnElement="Task_RequestNewOffer">
         <dc:Bounds x="2112" y="720" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1uy55m4_di" bpmnElement="Activity_087nj1e">
+      <bpmndi:BPMNShape id="Activity_1uy55m4_di" bpmnElement="Task_Face_Recognition">
         <dc:Bounds x="2330" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0e542p3_di" bpmnElement="Activity_0ugqjp8">
+      <bpmndi:BPMNShape id="Activity_0e542p3_di" bpmnElement="Task_DeliverCar">
         <dc:Bounds x="2490" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0cg275r_di" bpmnElement="Gateway_0cg275r" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="Gateway_0cg275r_di" bpmnElement="Gateway_TestDriveRequest" isMarkerVisible="true">
         <dc:Bounds x="1319" y="855" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1320" y="825" width="48" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0fa0v63_di" bpmnElement="Activity_1el3z5w">
+      <bpmndi:BPMNShape id="Activity_0fa0v63_di" bpmnElement="Task_CheckTestDriveRequest">
         <dc:Bounds x="1030" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1689whk_di" bpmnElement="Activity_1dggwfv">
+      <bpmndi:BPMNShape id="Activity_1689whk_di" bpmnElement="TaskAskToUploadDriverLicense">
         <dc:Bounds x="1180" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0gvrjhe_di" bpmnElement="Activity_0vexv7m">
+      <bpmndi:BPMNShape id="Activity_0gvrjhe_di" bpmnElement="Task_ScheduleTestDrive">
         <dc:Bounds x="1440" y="950" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1n1nqaa_di" bpmnElement="Activity_04mv792">
+      <bpmndi:BPMNShape id="Activity_1n1nqaa_di" bpmnElement="Task_AskIfTestDriveIsDesired">
         <dc:Bounds x="1610" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_02m6ft6_di" bpmnElement="Activity_07dqz9w">
+      <bpmndi:BPMNShape id="Event_02mctpg_di" bpmnElement="Event_02mctpg">
+        <dc:Bounds x="2272" y="642" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_070czo9_di" bpmnElement="Task_ConductDetailedRequirementAnalysis">
         <dc:Bounds x="1440" y="840" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0bep4wm_di" bpmnElement="Participant_0bep4wm" isHorizontal="true">

@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_0u4vcxq" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
-  <decision id="Decision_1eetf98" name="Car Configutarion: Golf">
+  <decision id="CarConfigutarion_Golf" name="Car Configutarion: Golf">
     <decisionTable id="decisionTable_1">
-      <input id="input_1">
+      <input id="input_1" label="Type of Travelling">
         <inputExpression id="inputExpression_1" typeRef="string">
-          <text></text>
+          <text>TypeofTravelling</text>
         </inputExpression>
       </input>
-      <input id="InputClause_1vvculf">
+      <input id="InputClause_1vvculf" label="Special Requirements">
         <inputExpression id="LiteralExpression_0lku6s2" typeRef="string">
+          <text>SpecialRequirements</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1xhh4mc" label="Purchasing Motive">
+        <inputExpression id="LiteralExpression_1s6zx55" typeRef="string">
+          <text>PurchasingMotive</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_11di8cp" label="Vehicle Users">
+        <inputExpression id="LiteralExpression_0si2reo" typeRef="string">
+          <text>VehicleUsers</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0uo4kh6" label="Km driven per year">
+        <inputExpression id="LiteralExpression_1jh5yro" typeRef="string">
           <text></text>
         </inputExpression>
       </input>
-      <output id="output_1" typeRef="string" />
+      <output id="output_1" label="Scoring" typeRef="string" />
     </decisionTable>
   </decision>
 </definitions>
