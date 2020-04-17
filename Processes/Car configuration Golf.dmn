@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_0u4vcxq" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_0u4vcxq" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
   <decision id="CarConfigutarion_Golf" name="Car Configutarion: Golf">
+    <extensionElements>
+      <biodi:bounds x="170" y="90" width="180" height="80" />
+    </extensionElements>
     <decisionTable id="decisionTable_1">
       <input id="input_1" label="Type of Travelling">
         <inputExpression id="inputExpression_1" typeRef="string">
