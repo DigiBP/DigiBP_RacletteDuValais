@@ -23,10 +23,6 @@
       <bpmn:outgoing>Flow_0u4itb3</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_05ug3yg" messageRef="Message_0ccs1cv" />
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1q2qm7z" name="Assign Lead to a Sales Person">
-      <bpmn:incoming>Flow_0u4itb3</bpmn:incoming>
-      <bpmn:outgoing>Flow_0vnjpsp</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:exclusiveGateway id="Gateway_0u0kx6y" name="Customer Inquiry?">
       <bpmn:outgoing>Flow_0pi4zgv</bpmn:outgoing>
       <bpmn:outgoing>Flow_0ptki5t</bpmn:outgoing>
@@ -215,6 +211,10 @@
     <bpmn:sequenceFlow id="Flow_0ck9zfb" sourceRef="Activity_1bzfdku" targetRef="Event_048zdlm" />
     <bpmn:sequenceFlow id="Flow_1urk3g9" sourceRef="Activity_0orwyg0" targetRef="Activity_1f3rt78" />
     <bpmn:sequenceFlow id="Flow_0t4lbq2" sourceRef="Activity_1t1xgak" targetRef="Activity_1bzfdku" />
+    <bpmn:userTask id="Activity_1q2qm7z" name="Assign Lead to a Sales Person">
+      <bpmn:incoming>Flow_0u4itb3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vnjpsp</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_0nxhg5q">
       <bpmn:text>Customer configures car or request test drive via SirChatALot, service stores chatbot-data in Dialog Flow and sends a message to the closest dealer.</bpmn:text>
     </bpmn:textAnnotation>
@@ -222,7 +222,7 @@
       <bpmn:text>Name of the dealer?</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_0im8cru">
-      <bpmn:text>Check Info from Chatbot</bpmn:text>
+      <bpmn:text>Check Info from Chatbot (Test drive or Car Configuration)</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_1abev9y">
       <bpmn:text>Analysis from Chatbot Data</bpmn:text>
@@ -237,12 +237,12 @@
       <bpmn:text>Scheduling</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_11jkpoc" sourceRef="Event_1aakghg" targetRef="TextAnnotation_0nxhg5q" />
-    <bpmn:association id="Association_0wghx5n" sourceRef="Activity_1q2qm7z" targetRef="TextAnnotation_14v9l4a" />
     <bpmn:association id="Association_0csbvy7" sourceRef="Activity_0k7f406" targetRef="TextAnnotation_0im8cru" />
     <bpmn:association id="Association_0rjfruk" sourceRef="Activity_0k8kbj4" targetRef="TextAnnotation_1abev9y" />
     <bpmn:association id="Association_0k7jviz" sourceRef="Activity_0sxmujp" targetRef="TextAnnotation_1ekzvrf" />
     <bpmn:association id="Association_0wkdsd0" sourceRef="Activity_1f46sgr" targetRef="TextAnnotation_1tr4ipa" />
     <bpmn:association id="Association_0p8m72k" sourceRef="Activity_1ty1bjc" targetRef="TextAnnotation_1v69b5z" />
+    <bpmn:association id="Association_0wghx5n" sourceRef="Activity_1q2qm7z" targetRef="TextAnnotation_14v9l4a" />
   </bpmn:process>
   <bpmn:message id="Message_0ccs1cv" name="MessageChatbotReceived" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -263,7 +263,7 @@
         <dc:Bounds x="470" y="640" width="99.98292349726775" height="38.25136612021857" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0im8cru_di" bpmnElement="TextAnnotation_0im8cru">
-        <dc:Bounds x="632" y="644" width="99.97459349593495" height="39.48896631823461" />
+        <dc:Bounds x="632" y="644" width="99.97061128526646" height="68.9655172413793" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1abev9y_di" bpmnElement="TextAnnotation_1abev9y">
         <dc:Bounds x="910" y="735" width="99.99156545209178" height="39.13630229419703" />
@@ -311,10 +311,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0u4itb3_di" bpmnElement="Flow_0u4itb3">
         <di:waypoint x="438" y="560" />
-        <di:waypoint x="470" y="560" />
+        <di:waypoint x="480" y="560" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0vnjpsp_di" bpmnElement="Flow_0vnjpsp">
-        <di:waypoint x="570" y="560" />
+        <di:waypoint x="580" y="560" />
         <di:waypoint x="632" y="560" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_193giqc_di" bpmnElement="Flow_193giqc">
@@ -391,9 +391,6 @@
           <dc:Bounds x="305" y="546" width="87" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1q2qm7z_di" bpmnElement="Activity_1q2qm7z">
-        <dc:Bounds x="470" y="520" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0u0kx6y_di" bpmnElement="Gateway_0u0kx6y" isMarkerVisible="true">
         <dc:Bounds x="785" y="535" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -451,13 +448,12 @@
       <bpmndi:BPMNShape id="Activity_12ri1ps_di" bpmnElement="Activity_1t1xgak">
         <dc:Bounds x="1880" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1q2qm7z_di" bpmnElement="Activity_1q2qm7z">
+        <dc:Bounds x="480" y="520" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_11jkpoc_di" bpmnElement="Association_11jkpoc">
         <di:waypoint x="410" y="575" />
         <di:waypoint x="375" y="630" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0wghx5n_di" bpmnElement="Association_0wghx5n">
-        <di:waypoint x="520" y="600" />
-        <di:waypoint x="520" y="640" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0csbvy7_di" bpmnElement="Association_0csbvy7">
         <di:waypoint x="682" y="600" />
@@ -478,6 +474,10 @@
       <bpmndi:BPMNEdge id="Association_0p8m72k_di" bpmnElement="Association_0p8m72k">
         <di:waypoint x="1260" y="390" />
         <di:waypoint x="1289" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0wghx5n_di" bpmnElement="Association_0wghx5n">
+        <di:waypoint x="530" y="600" />
+        <di:waypoint x="520" y="640" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0n9iljx_di" bpmnElement="Flow_0n9iljx">
         <di:waypoint x="420" y="140" />
