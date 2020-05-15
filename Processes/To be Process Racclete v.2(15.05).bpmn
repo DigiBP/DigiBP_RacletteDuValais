@@ -31,7 +31,7 @@
     <bpmn:userTask id="Activity_1f46sgr" name="Ask to Upload Driver License">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="checktestdriverequest" type="boolean" defaultValue="testdriverequested" />
+          <camunda:formField id="TestDrive" type="boolean" defaultValue="testdriverequested" />
         </camunda:formData>
         <camunda:inputOutput>
           <camunda:outputParameter name="testdriverequested">True</camunda:outputParameter>
@@ -60,15 +60,32 @@
   "City": City,
   "Phone": Phone,
   "Users": Users,
-  "TravelType": TravelType,
   "SpecialReq": SpecialReq,
+"Color": Color,
   "Motive": Motive,
- });
-</camunda:script>
+"TravelType": TravelType,
+ });</camunda:script>
             </camunda:inputParameter>
+            <camunda:outputParameter name="recommendedmodel">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+recommendedmodel=object.ScoringCalc;</camunda:script>
+            </camunda:outputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
         </camunda:connector>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="FirstName" />
+          <camunda:inputParameter name="LastName" />
+          <camunda:inputParameter name="ZIP" />
+          <camunda:inputParameter name="City" />
+          <camunda:inputParameter name="Phone" />
+          <camunda:inputParameter name="Users" />
+          <camunda:inputParameter name="SpecialReq" />
+          <camunda:inputParameter name="Color" />
+          <camunda:inputParameter name="Motive" />
+          <camunda:inputParameter name="TravelType" />
+          <camunda:outputParameter name="Recommendation">${Recommendation.scoringCalc}</camunda:outputParameter>
+        </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0pi4zgv</bpmn:incoming>
       <bpmn:outgoing>Flow_0n8ytry</bpmn:outgoing>
@@ -76,7 +93,7 @@
     <bpmn:userTask id="Activity_0sxmujp" name="Ask if Test Drive is Desired">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="TestDrive" type="boolean" defaultValue="testdrive" />
+          <camunda:formField id="TestDrive" label="Test Drive Desired?" type="boolean" defaultValue="testdrive" />
         </camunda:formData>
         <camunda:inputOutput>
           <camunda:outputParameter name="testdrive">Yes</camunda:outputParameter>
@@ -149,7 +166,7 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/l9567ey40x4qogbdvf1gcpdumme2g4b2</camunda:inputParameter>
-            <camunda:inputParameter name="payload">
+            <camunda:inputParameter name="options">
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
   "FirstName": FirstName,
   "LastName": LastName,
@@ -163,7 +180,10 @@
  });
 </camunda:script>
             </camunda:inputParameter>
-            <camunda:outputParameter name="Customerdecision" />
+            <camunda:outputParameter name="Customerdecision">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+inquiry=object.CustomerDecision;</camunda:script>
+            </camunda:outputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
         </camunda:connector>
