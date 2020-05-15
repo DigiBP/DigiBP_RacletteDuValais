@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0vswsvv" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <decision id="DetailedRequirementAnalysis" name="Detailed Requirement Analysis">
+    <extensionElements>
+      <biodi:bounds x="540" y="110" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="input_1" label="Type of Travelling" camunda:inputVariable="TypeOfTravelling">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>TypeOfTravelling</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_13rhubq">
+          <text>"Long distance","Highway","City","Short distance","Offroad"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1cycb7l" label="Special Requirements" camunda:inputVariable="SpecialRequirements">
+        <inputExpression id="LiteralExpression_1d6gnnf" typeRef="string">
+          <text>SpecialRequirements</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1tm2tsp">
+          <text>"None","Bad road conditions","Trailer loads"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0in0zxb" label="Purchasing Motive" camunda:inputVariable="PurchasingMotive">
+        <inputExpression id="LiteralExpression_0xbapnh" typeRef="string">
+          <text>PurchasingMotive</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0z87vry">
+          <text>"Thrift","Safety","Sportive driving","Prestige","Spacious","Environmental friendliness"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_12jth0w" label="Vehicle Users" camunda:inputVariable="VehicleUsers">
+        <inputExpression id="LiteralExpression_1f38gmr" typeRef="string">
+          <text>VehicleUsers</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1s2qmxm">
+          <text>"Alone","Couple","Family of 4","Family &gt; 4"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1u9c0an" label="Km driven per year" camunda:inputVariable="KmDrivenPerYear">
+        <inputExpression id="LiteralExpression_1f0n9tj" typeRef="double">
+          <text>KmDrivenPerYear</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Car Model Offering Price Range" name="CarModelOfferingPriceRange" typeRef="string" />
+      <output id="OutputClause_0a3ui01" label="Explanation" name="Explanation" typeRef="string" />
+      <rule id="DecisionRule_0jpnyu0">
+        <description></description>
+        <inputEntry id="UnaryTests_032h10f">
+          <text>"Short distance"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dbw4cq">
+          <text>"None"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ywhy5i">
+          <text>"Environmental friendliness"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o41glr">
+          <text>"Couple"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w5s92h">
+          <text>&lt;20000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wlcuma">
+          <text>"High"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1uf7vwz">
+          <text>"Offer Model: ID.3"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0pjqfg7">
+        <description></description>
+        <inputEntry id="UnaryTests_1p8crjb">
+          <text>"Highway"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05qylr1">
+          <text>"None"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mxr7by">
+          <text>"Sportive driving"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dipgfu">
+          <text>"Alone"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sod3ra">
+          <text>[20000..60000]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ahxggt">
+          <text>"Medium"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uolv9q">
+          <text>"Offer Model: Golf"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nv8ab4">
+        <description></description>
+        <inputEntry id="UnaryTests_0zms90g">
+          <text>"City"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0on553o">
+          <text>"None"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0adwmqp">
+          <text>"Safety"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dzxoei">
+          <text>"Couple"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zvi9qc">
+          <text>&lt;20000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14ebxn8">
+          <text>"Low-Medium"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0lr20r9">
+          <text>"Offer Model: Polo"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1b55mzs">
+        <description></description>
+        <inputEntry id="UnaryTests_12iikkd">
+          <text>"Long distance","Offroad"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qurflx">
+          <text>"Trailer loads"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uaxahv">
+          <text>"Thrift","Spacious"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ihfp3q">
+          <text>"Couple","Family of 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bqx78m">
+          <text>&gt; 60000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0pdv8jp">
+          <text>"High"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0js0jx9">
+          <text>"Offer Model Touareg"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05ef1ao">
+        <description></description>
+        <inputEntry id="UnaryTests_0ls309e">
+          <text>"City"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a6lz3k">
+          <text>"Bad road conditions"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19y3nma">
+          <text>"Sportive driving","Prestige"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17eveoy">
+          <text>"Family &gt; 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1d44l4p">
+          <text>&lt;20000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_08qnevj">
+          <text>"High"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0jt3qbp">
+          <text>"Offer Model Touareg"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_198awhk">
+        <description></description>
+        <inputEntry id="UnaryTests_0foszb7">
+          <text>"Short distance"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0beojm8">
+          <text>"Bad road conditions"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wkifri">
+          <text>"Safety"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uwlwd0">
+          <text>"Family of 4"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05qpczh">
+          <text>[20000..60000]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_048kxfa">
+          <text>"Medium-High"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wmrman">
+          <text>"Offer Model: Golf"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_15nzr31">
+        <description></description>
+        <inputEntry id="UnaryTests_0vn4n96">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tuvomq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r6u5to">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uqk4hg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r9o8v6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19dycn0">
+          <text>"Low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1qbi5xc">
+          <text>"Offer Model: Polo"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Offer_Model_Golf" name="Offer Model: Golf">
+    <extensionElements>
+      <biodi:bounds x="640" y="320" width="180" height="80" />
+      <biodi:edge source="DetailedRequirementAnalysis">
+        <biodi:waypoints x="658" y="190" />
+        <biodi:waypoints x="703" y="320" />
+      </biodi:edge>
+      <biodi:edge source="Offering_Golf">
+        <biodi:waypoints x="730" y="460" />
+        <biodi:waypoints x="730" y="400" />
+      </biodi:edge>
+    </extensionElements>
+    <variable id="InformationItem_0c6h834" typeRef="double" />
+    <informationRequirement>
+      <requiredDecision href="#DetailedRequirementAnalysis" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#Offering_Golf" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_0h4892y" expressionLanguage="javascript" />
+  </decision>
+  <decision id="Offer_Model_Polo" name="Offer Model: Polo">
+    <extensionElements>
+      <biodi:bounds x="200" y="320" width="180" height="80" />
+      <biodi:edge source="DetailedRequirementAnalysis">
+        <biodi:waypoints x="548" y="190" />
+        <biodi:waypoints x="373" y="320" />
+      </biodi:edge>
+      <biodi:edge source="Offer_Polo">
+        <biodi:waypoints x="290" y="460" />
+        <biodi:waypoints x="290" y="400" />
+      </biodi:edge>
+    </extensionElements>
+    <variable id="InformationItem_042ixp0" typeRef="double" />
+    <informationRequirement>
+      <requiredDecision href="#DetailedRequirementAnalysis" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#Offering_Polo" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_0l904vo" expressionLanguage="javascript" />
+  </decision>
+  <decision id="Offer_Model_ID.3" name="Offer Model: ID.3">
+    <extensionElements>
+      <biodi:bounds x="420" y="320" width="180" height="80" />
+      <biodi:edge source="DetailedRequirementAnalysis">
+        <biodi:waypoints x="603" y="190" />
+        <biodi:waypoints x="538" y="320" />
+      </biodi:edge>
+      <biodi:edge source="Offering_ID.3">
+        <biodi:waypoints x="510" y="460" />
+        <biodi:waypoints x="510" y="400" />
+      </biodi:edge>
+    </extensionElements>
+    <variable id="InformationItem_0m46bkv" typeRef="double" />
+    <informationRequirement>
+      <requiredDecision href="#DetailedRequirementAnalysis" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#Offering_ID.3" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_0mo8xig" expressionLanguage="javascript" />
+  </decision>
+  <decision id="Offer_Model_Touareg" name="Offer Model: Touareg">
+    <extensionElements>
+      <biodi:bounds x="860" y="320" width="180" height="80" />
+      <biodi:edge source="DetailedRequirementAnalysis">
+        <biodi:waypoints x="713" y="190" />
+        <biodi:waypoints x="868" y="320" />
+      </biodi:edge>
+      <biodi:edge source="Offering_Touareg">
+        <biodi:waypoints x="950" y="460" />
+        <biodi:waypoints x="950" y="400" />
+      </biodi:edge>
+    </extensionElements>
+    <variable id="InformationItem_0t4wf3z" typeRef="double" />
+    <informationRequirement>
+      <requiredDecision href="#DetailedRequirementAnalysis" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredDecision href="#Offering_Touareg" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_0edqvjy" expressionLanguage="javascript" />
+  </decision>
+  <decision id="Offer_Polo" name="Offering: Polo">
+    <extensionElements>
+      <biodi:bounds x="200" y="460" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="DecisionTable_1geqa67" hitPolicy="FIRST">
+      <input id="InputClause_11784vx" label="Categorie" camunda:inputVariable="Categorie">
+        <inputExpression id="LiteralExpression_1msjdd7" typeRef="string">
+          <text>Categorie</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_18t0b27">
+          <text>"Trendline","Comfortline","Highline"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_0z05tin" label="Price" typeRef="double" />
+      <rule id="DecisionRule_1h8b228">
+        <description>Offer Polo: 1</description>
+        <inputEntry id="UnaryTests_1s7il7t">
+          <text>"Trendline"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_09qwfs5">
+          <text>17850</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18sdyfw">
+        <description>Offer Polo: 2</description>
+        <inputEntry id="UnaryTests_0ksb7es">
+          <text>"Comfortline"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_137152j">
+          <text>21250</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kfnp0o">
+        <description>Offer Polo: 3</description>
+        <inputEntry id="UnaryTests_0wz1qus">
+          <text>"Highline"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jjn3an">
+          <text>26150</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06kt6i7">
+        <description>Offer Polo: 2</description>
+        <inputEntry id="UnaryTests_0ye4ufh">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1lyun3c">
+          <text>21250</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Offering_ID.3" name="Offering: ID.3">
+    <extensionElements>
+      <biodi:bounds x="420" y="460" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="DecisionTable_0cm59d5">
+      <input id="InputClause_0kwqbnx" label="Categorie" camunda:inputVariable="Categorie">
+        <inputExpression id="LiteralExpression_041xvq9" typeRef="string">
+          <text>Categorie</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_08yuw6j" label="Price" typeRef="string" />
+      <rule id="DecisionRule_1az2qhw">
+        <description>Offer ID.3: 1</description>
+        <inputEntry id="UnaryTests_0b5g96m">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gwhdar">
+          <text>54000</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Offering_Golf" name="Offering: Golf">
+    <extensionElements>
+      <biodi:bounds x="640" y="460" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="DecisionTable_0o1dovw">
+      <input id="InputClause_1qnwgik" label="Categorie" camunda:inputVariable="Categorie">
+        <inputExpression id="LiteralExpression_1vdaomc" typeRef="string">
+          <text>Categorie</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1gnw54w">
+          <text>"Comfort","Highline"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_1h7w1br" label="Price" name="Price" typeRef="string" />
+      <rule id="DecisionRule_1ksyd6a">
+        <description>Offer Golf: 1</description>
+        <inputEntry id="UnaryTests_1fexe9h">
+          <text>"Comfort"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1yglkyf">
+          <text>28450</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ai82fk">
+        <description>Offer Golf: 2</description>
+        <inputEntry id="UnaryTests_115knuk">
+          <text>"Highline"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_082kg8q">
+          <text>34950</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1wbmjpa">
+        <description>Offer Golf: 2</description>
+        <inputEntry id="UnaryTests_0be80gt">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1022thg">
+          <text>34950</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Offering_Touareg" name="Offering: Touareg">
+    <extensionElements>
+      <biodi:bounds x="860" y="460" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="DecisionTable_19fg4a4">
+      <input id="InputClause_093xtg6" label="Categorie" camunda:inputVariable="Categorie">
+        <inputExpression id="LiteralExpression_0k43s1i" typeRef="string">
+          <text>Categorie</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1rcsxmo">
+          <text>"Base","Atmosphere","Elegance","R-Line"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_0w9umnx" label="Price" typeRef="string" />
+      <rule id="DecisionRule_0q5jmg6">
+        <description>Offer Touareg: 1</description>
+        <inputEntry id="UnaryTests_0uyh68l">
+          <text>"Base"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11iq6st">
+          <text>69900</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1j2zst1">
+        <description>Offer Touareg: 2</description>
+        <inputEntry id="UnaryTests_0l6lha2">
+          <text>"Elegance"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1d1yxmh">
+          <text>78000</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0zaw2t0">
+        <description>Offer Touareg: 3</description>
+        <inputEntry id="UnaryTests_1vczarj">
+          <text>"R-Line"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jol99n">
+          <text>81000</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1iy4qub">
+        <description>Offer Touareg: 2</description>
+        <inputEntry id="UnaryTests_1crx6c1">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ax40k0">
+          <text>78000</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1a5c3np" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:process id="Raclettetest1" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1coiqyg</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_1vg3468" name="Ask to upload driver license">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="checktestdriverequest" type="boolean" defaultValue="testdriverequested" />
+        </camunda:formData>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="testdriverequested">True</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1coiqyg</bpmn:incoming>
+      <bpmn:outgoing>Flow_097sp5j</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_0b06r1p" name="Conduct detailed requirement analysis">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/l9567ey40x4qogbdvf1gcpdumme2g4b2</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+  "Name": Name,
+  "Address": Address,
+  "Country": Country,
+  "PhoneNumber": PhoneNumber,
+  "TypeOfTravelling": TypeOfTravelling,
+  "SpecialRequirements": SpecialRequirements,
+  "PurchasingMotive": PurchasingMotive,
+  "VehicleUsers":VehicleUsers,
+  "KmDrivenPerYearr": KmDrivenPerYear,
+});
+</camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_097sp5j</bpmn:incoming>
+      <bpmn:outgoing>Flow_10kxl5k</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1coiqyg" sourceRef="StartEvent_1" targetRef="Activity_1vg3468" />
+    <bpmn:task id="Activity_19y8hkk">
+      <bpmn:incoming>Flow_10kxl5k</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m2fuhn</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_10kxl5k" sourceRef="Activity_0b06r1p" targetRef="Activity_19y8hkk" />
+    <bpmn:endEvent id="Event_1mg7od1">
+      <bpmn:incoming>Flow_1m2fuhn</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1m2fuhn" sourceRef="Activity_19y8hkk" targetRef="Event_1mg7od1" />
+    <bpmn:sequenceFlow id="Flow_097sp5j" sourceRef="Activity_1vg3468" targetRef="Activity_0b06r1p" />
+    <bpmn:textAnnotation id="TextAnnotation_0u27fm2">
+      <bpmn:text>Driver License?</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1ml0mz6">
+      <bpmn:text>Scheduling</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0bchtfd" sourceRef="Activity_1vg3468" targetRef="TextAnnotation_0u27fm2" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Raclettetest1">
+      <bpmndi:BPMNShape id="TextAnnotation_0u27fm2_di" bpmnElement="TextAnnotation_0u27fm2">
+        <dc:Bounds x="290" y="220" width="99.99156545209178" height="29.984817813765183" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ml0mz6_di" bpmnElement="TextAnnotation_1ml0mz6">
+        <dc:Bounds x="550" y="316" width="99.99156545209178" height="29.984817813765183" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1coiqyg_di" bpmnElement="Flow_1coiqyg">
+        <di:waypoint x="215" y="136" />
+        <di:waypoint x="290" y="136" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10kxl5k_di" bpmnElement="Flow_10kxl5k">
+        <di:waypoint x="650" y="136" />
+        <di:waypoint x="730" y="136" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m2fuhn_di" bpmnElement="Flow_1m2fuhn">
+        <di:waypoint x="830" y="136" />
+        <di:waypoint x="912" y="136" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_097sp5j_di" bpmnElement="Flow_097sp5j">
+        <di:waypoint x="390" y="136" />
+        <di:waypoint x="550" y="136" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1vg3468_di" bpmnElement="Activity_1vg3468">
+        <dc:Bounds x="290" y="96" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0b06r1p_di" bpmnElement="Activity_0b06r1p">
+        <dc:Bounds x="550" y="96" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="118" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_19y8hkk_di" bpmnElement="Activity_19y8hkk">
+        <dc:Bounds x="730" y="96" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1mg7od1_di" bpmnElement="Event_1mg7od1">
+        <dc:Bounds x="912" y="118" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0bchtfd_di" bpmnElement="Association_0bchtfd">
+        <di:waypoint x="340" y="176" />
+        <di:waypoint x="340" y="220" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
