@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1qw8nh4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:process id="Process_1ajjoo7" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1xyhcrh</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_1jofe7k" name="Customer Inquiry?">
+      <bpmn:incoming>Flow_1j9uj2g</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xjwjag</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0q6ep2m</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_13r6cu0" name="Ask to Upload Driver License">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="checktestdriverequest" type="boolean" defaultValue="testdriverequested" />
+        </camunda:formData>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="testdriverequested">True</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0q6ep2m</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bz5s0c</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1xjwjag" name="Configuration" sourceRef="Gateway_1jofe7k" targetRef="Activity_08nwyu8">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry=="Configure"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0q6ep2m" name="Test" sourceRef="Gateway_1jofe7k" targetRef="Activity_13r6cu0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry!="Configure"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1bz5s0c" sourceRef="Activity_13r6cu0" targetRef="Activity_0ty5qnb" />
+    <bpmn:userTask id="Activity_0ty5qnb" name="Test Driving">
+      <bpmn:incoming>Flow_1bz5s0c</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1f6x3f3">
+      <bpmn:incoming>Flow_1t7k4fc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1t7k4fc" sourceRef="Activity_08nwyu8" targetRef="Event_1f6x3f3" />
+    <bpmn:userTask id="Activity_08nwyu8" name="Conduct Detailed Requirement Analysis">
+      <bpmn:incoming>Flow_1xjwjag</bpmn:incoming>
+      <bpmn:outgoing>Flow_1t7k4fc</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1crjuqb" name="Check Inquiry">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="inquiry">Configure</camunda:outputParameter>
+        </camunda:inputOutput>
+        <camunda:formData>
+          <camunda:formField id="CheckInquiry" type="boolean" defaultValue="inquiry" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xyhcrh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1j9uj2g</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1j9uj2g" sourceRef="Activity_1crjuqb" targetRef="Gateway_1jofe7k" />
+    <bpmn:sequenceFlow id="Flow_1xyhcrh" sourceRef="StartEvent_1" targetRef="Activity_1crjuqb" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1ajjoo7">
+      <bpmndi:BPMNEdge id="Flow_1xjwjag_di" bpmnElement="Flow_1xjwjag" bioc:stroke="rgb(229, 57, 53)" bioc:fill="rgb(255, 205, 210)">
+        <di:waypoint x="478" y="291" />
+        <di:waypoint x="478" y="377" />
+        <di:waypoint x="588" y="377" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="498" y="359" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0q6ep2m_di" bpmnElement="Flow_0q6ep2m" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
+        <di:waypoint x="478" y="241" />
+        <di:waypoint x="478" y="126" />
+        <di:waypoint x="588" y="126" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="523" y="108" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bz5s0c_di" bpmnElement="Flow_1bz5s0c">
+        <di:waypoint x="688" y="126" />
+        <di:waypoint x="780" y="126" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1t7k4fc_di" bpmnElement="Flow_1t7k4fc">
+        <di:waypoint x="688" y="377" />
+        <di:waypoint x="782" y="377" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1j9uj2g_di" bpmnElement="Flow_1j9uj2g">
+        <di:waypoint x="390" y="266" />
+        <di:waypoint x="453" y="266" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xyhcrh_di" bpmnElement="Flow_1xyhcrh">
+        <di:waypoint x="208" y="266" />
+        <di:waypoint x="290" y="266" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Gateway_1jofe7k_di" bpmnElement="Gateway_1jofe7k" isMarkerVisible="true">
+        <dc:Bounds x="453" y="241" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="503" y="259" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13r6cu0_di" bpmnElement="Activity_13r6cu0">
+        <dc:Bounds x="588" y="86" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1f6x3f3_di" bpmnElement="Event_1f6x3f3">
+        <dc:Bounds x="782" y="359" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0b28gdi_di" bpmnElement="Activity_08nwyu8">
+        <dc:Bounds x="588" y="337" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1crjuqb_di" bpmnElement="Activity_1crjuqb">
+        <dc:Bounds x="290" y="226" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="248" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0j8j9b7_di" bpmnElement="Activity_0ty5qnb">
+        <dc:Bounds x="780" y="86" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
