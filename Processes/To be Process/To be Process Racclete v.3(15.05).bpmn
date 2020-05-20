@@ -46,29 +46,10 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">https://hook.integromat.com/l9567ey40x4qogbdvf1gcpdumme2g4b2</camunda:inputParameter>
-            <camunda:inputParameter name="headers">
-              <camunda:map>
-                <camunda:entry key="Content-Type">application/json</camunda:entry>
-              </camunda:map>
-            </camunda:inputParameter>
-            <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
-  "FirstName": FirstName,
-  "LastName": LastName,
-  "ZIP": ZIP,
-  "City": City,
-  "Phone": Phone,
-  "Users": Users,
-  "SpecialReq": SpecialReq,
-"Color": Color,
-  "Motive": Motive,
-"TravelType": TravelType,
- });</camunda:script>
-            </camunda:inputParameter>
-            <camunda:outputParameter name="recommendedmodel">
+            <camunda:inputParameter name="url">https://hook.integromat.com/1xbngn3ley2jj2qaycav438tpel5xv4y</camunda:inputParameter>
+            <camunda:outputParameter name="Recommendation">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-recommendedmodel=object.ScoringCalc;</camunda:script>
+Recommendation=object.Chat_Test_1;</camunda:script>
             </camunda:outputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
@@ -173,8 +154,7 @@ recommendedmodel=object.ScoringCalc;</camunda:script>
   "Color": "Black, Blue, White, Yellow ",
   "Motive": "Safety,Sportive driving,Prestige,Spacious,Environmental friendliness",
   "TravelType": "Long-distance, Highway, City, Short Distance, Offroad"
-}
-</camunda:script>
+}</camunda:script>
             </camunda:inputParameter>
             <camunda:outputParameter name="Customerdecision">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
@@ -196,13 +176,11 @@ inquiry=object.CustomerDecision;</camunda:script>
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">https://hook.integromat.com/l9567ey40x4qogbdvf1gcpdumme2g4b2</camunda:inputParameter>
-            <camunda:inputParameter name="FaceRecognition">
-              <camunda:script scriptFormat="JavaScript">{
-  "FirstName": " ",
-  "LastName": " ",
-}</camunda:script>
-            </camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/ti7wtdy2bjnfiv1gu2b16n51pswdrjtl</camunda:inputParameter>
+            <camunda:outputParameter name="Identifiziert">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+Identifiziert=object.Chat_Test_1;</camunda:script>
+            </camunda:outputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
         </camunda:connector>
