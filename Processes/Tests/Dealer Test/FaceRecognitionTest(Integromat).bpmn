@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_19oq9gn" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:process id="Process_10z3g8g" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0yqt3q1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_13rsr3p">
+      <bpmn:incoming>Flow_0lo6lak</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Activity_1wce6me" name="Deliver Car">
+      <bpmn:incoming>Flow_13yjzi7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lo6lak</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_1wq4ufp" name="Perform face recognition authentication">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/ti7wtdy2bjnfiv1gu2b16n51pswdrjtl</camunda:inputParameter>
+            <camunda:outputParameter name="Identifiziert">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+Identifiziert=object.Chat_Test_1;</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0yqt3q1</bpmn:incoming>
+      <bpmn:outgoing>Flow_13yjzi7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0lo6lak" sourceRef="Activity_1wce6me" targetRef="Event_13rsr3p" />
+    <bpmn:sequenceFlow id="Flow_13yjzi7" sourceRef="Activity_1wq4ufp" targetRef="Activity_1wce6me" />
+    <bpmn:sequenceFlow id="Flow_0yqt3q1" sourceRef="StartEvent_1" targetRef="Activity_1wq4ufp" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_10z3g8g">
+      <bpmndi:BPMNEdge id="Flow_0lo6lak_di" bpmnElement="Flow_0lo6lak">
+        <di:waypoint x="550" y="117" />
+        <di:waypoint x="582" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13yjzi7_di" bpmnElement="Flow_13yjzi7">
+        <di:waypoint x="390" y="117" />
+        <di:waypoint x="450" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yqt3q1_di" bpmnElement="Flow_0yqt3q1">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="290" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13rsr3p_di" bpmnElement="Event_13rsr3p">
+        <dc:Bounds x="582" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wce6me_di" bpmnElement="Activity_1wce6me">
+        <dc:Bounds x="450" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wq4ufp_di" bpmnElement="Activity_1wq4ufp">
+        <dc:Bounds x="290" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

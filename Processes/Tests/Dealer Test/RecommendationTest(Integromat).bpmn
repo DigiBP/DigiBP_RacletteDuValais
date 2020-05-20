@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0rxyrsw" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:process id="Process_0l1eac4" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0yp41gz</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_0nbfyoz" name="Conduct Detailed Requirement Analysis">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/1xbngn3ley2jj2qaycav438tpel5xv4y</camunda:inputParameter>
+            <camunda:outputParameter name="Recommendation">
+              <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
+Recommendation=object.Chat_Test_1;</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="FirstName" />
+          <camunda:inputParameter name="LastName" />
+          <camunda:inputParameter name="ZIP" />
+          <camunda:inputParameter name="City" />
+          <camunda:inputParameter name="Phone" />
+          <camunda:inputParameter name="Users" />
+          <camunda:inputParameter name="SpecialReq" />
+          <camunda:inputParameter name="Color" />
+          <camunda:inputParameter name="Motive" />
+          <camunda:inputParameter name="TravelType" />
+          <camunda:outputParameter name="Recommendation">${Recommendation.scoringCalc}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0yp41gz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rwhjhw</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_05dhbq8" name="Ask if Test Drive is Desired">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="testdrive">Yes</camunda:outputParameter>
+        </camunda:inputOutput>
+        <camunda:formData>
+          <camunda:formField id="Recommendation" label="Recommendation?" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0rwhjhw</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dhx0vy</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0rwhjhw" sourceRef="Activity_0nbfyoz" targetRef="Activity_05dhbq8" />
+    <bpmn:sequenceFlow id="Flow_0yp41gz" sourceRef="StartEvent_1" targetRef="Activity_0nbfyoz" />
+    <bpmn:endEvent id="Event_133x6p7">
+      <bpmn:incoming>Flow_0dhx0vy</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0dhx0vy" sourceRef="Activity_05dhbq8" targetRef="Event_133x6p7" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0l1eac4">
+      <bpmndi:BPMNEdge id="Flow_0rwhjhw_di" bpmnElement="Flow_0rwhjhw">
+        <di:waypoint x="410" y="117" />
+        <di:waypoint x="470" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yp41gz_di" bpmnElement="Flow_0yp41gz">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="310" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dhx0vy_di" bpmnElement="Flow_0dhx0vy">
+        <di:waypoint x="570" y="117" />
+        <di:waypoint x="632" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nbfyoz_di" bpmnElement="Activity_0nbfyoz">
+        <dc:Bounds x="310" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05dhbq8_di" bpmnElement="Activity_05dhbq8">
+        <dc:Bounds x="470" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_133x6p7_di" bpmnElement="Event_133x6p7">
+        <dc:Bounds x="632" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
