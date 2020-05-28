@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1tshemm" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:process id="SirChatAlotTest" isExecutable="true">
+    <bpmn:startEvent id="Event_1lxxo3d" name="Message Chatbot Received">
+      <bpmn:outgoing>Flow_166u5n2</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1kzqev4" messageRef="Message_1eb6yfr" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_0hq6932" name="Assign Lead to a Sales Person">
+      <bpmn:incoming>Flow_166u5n2</bpmn:incoming>
+      <bpmn:outgoing>Flow_00ykaxd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_166u5n2" sourceRef="Event_1lxxo3d" targetRef="Activity_0hq6932" />
+    <bpmn:endEvent id="Event_01ccxxp">
+      <bpmn:incoming>Flow_00ykaxd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_00ykaxd" sourceRef="Activity_0hq6932" targetRef="Event_01ccxxp" />
+  </bpmn:process>
+  <bpmn:message id="Message_1eb6yfr" name="MessageChatbotReceived" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SirChatAlotTest">
+      <bpmndi:BPMNEdge id="Flow_166u5n2_di" bpmnElement="Flow_166u5n2">
+        <di:waypoint x="288" y="120" />
+        <di:waypoint x="360" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00ykaxd_di" bpmnElement="Flow_00ykaxd">
+        <di:waypoint x="460" y="120" />
+        <di:waypoint x="532" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0hq6932_di" bpmnElement="Activity_0hq6932">
+        <dc:Bounds x="360" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01ccxxp_di" bpmnElement="Event_01ccxxp">
+        <dc:Bounds x="532" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1lxxo3d_di" bpmnElement="Event_1lxxo3d">
+        <dc:Bounds x="252" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="155" y="106" width="87" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

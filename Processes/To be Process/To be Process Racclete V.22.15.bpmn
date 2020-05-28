@@ -21,7 +21,7 @@
   <bpmn:process id="Process_Raclette15.05" isExecutable="true">
     <bpmn:startEvent id="Event_1aakghg" name="Message Chatbot Received">
       <bpmn:outgoing>Flow_0u4itb3</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_05ug3yg" messageRef="Message_0ccs1cv" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_05ug3yg" messageRef="Message_1d3u5io" />
     </bpmn:startEvent>
     <bpmn:exclusiveGateway id="Gateway_0u0kx6y" name="Customer Inquiry?">
       <bpmn:incoming>Flow_1xgt3mi</bpmn:incoming>
@@ -108,7 +108,7 @@ Recommendation=object.Chat_Test_1;</camunda:script>
           <camunda:formField id="Offering" type="boolean" defaultValue="offer" />
         </camunda:formData>
         <camunda:inputOutput>
-          <camunda:outputParameter name="offer">yes</camunda:outputParameter>
+          <camunda:outputParameter name="offer">Yes</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1urk3g9</bpmn:incoming>
@@ -165,10 +165,10 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0l2c7r6" sourceRef="Activity_0sxmujp" targetRef="Gateway_171glvv" />
     <bpmn:sequenceFlow id="Flow_0ptki5t" name="TestDrive" sourceRef="Gateway_0u0kx6y" targetRef="Activity_1f46sgr">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry=="TestDrive"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry!="ConfigureCar"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0pi4zgv" name="ConfigureCar" sourceRef="Gateway_0u0kx6y" targetRef="Activity_0k8kbj4">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry=="configureCar"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry=="ConfigureCar"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0u4itb3" sourceRef="Event_1aakghg" targetRef="Activity_1q2qm7z" />
     <bpmn:sequenceFlow id="Flow_193giqc" sourceRef="Activity_00l7f01" targetRef="Activity_0wu8b5z" />
@@ -191,6 +191,14 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
     <bpmn:sequenceFlow id="Flow_0t4lbq2" sourceRef="Activity_1t1xgak" targetRef="Activity_1bzfdku" />
     <bpmn:sequenceFlow id="Flow_1xgt3mi" sourceRef="Activity_1q2qm7z" targetRef="Gateway_0u0kx6y" />
     <bpmn:userTask id="Activity_1q2qm7z" name="Assign Lead to a Sales Person">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="inquiry">ConfigureCar</camunda:outputParameter>
+        </camunda:inputOutput>
+        <camunda:formData>
+          <camunda:formField id="CustomerInquiry" label="Customer Inquiry?" type="boolean" defaultValue="inquiry" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0u4itb3</bpmn:incoming>
       <bpmn:outgoing>Flow_1xgt3mi</bpmn:outgoing>
     </bpmn:userTask>
@@ -220,14 +228,16 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
     <bpmn:association id="Association_1jmllml" sourceRef="Gateway_0u0kx6y" targetRef="TextAnnotation_1jo4qhg" />
   </bpmn:process>
   <bpmn:message id="Message_0ccs1cv" name="MessageChatbotReceived" />
+  <bpmn:message id="Message_1d3u5io" name="Message_1moq0e3" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_10dglfq">
       <bpmndi:BPMNShape id="Participant_0thxx78_di" bpmnElement="Participant_0thxx78" isHorizontal="true" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="170" y="290" width="2130" height="510" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1jo4qhg_di" bpmnElement="TextAnnotation_1jo4qhg">
-        <dc:Bounds x="680" y="610" width="100" height="68" />
-      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1xgt3mi_di" bpmnElement="Flow_1xgt3mi">
+        <di:waypoint x="680" y="560" />
+        <di:waypoint x="785" y="560" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0t4lbq2_di" bpmnElement="Flow_0t4lbq2">
         <di:waypoint x="1980" y="540" />
         <di:waypoint x="2040" y="540" />
@@ -328,10 +338,6 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
         <di:waypoint x="1020" y="671" />
         <di:waypoint x="1080" y="671" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1xgt3mi_di" bpmnElement="Flow_1xgt3mi">
-        <di:waypoint x="680" y="560" />
-        <di:waypoint x="785" y="560" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1aakghg_di" bpmnElement="Event_1aakghg">
         <dc:Bounds x="402" y="542" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -392,6 +398,9 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
       <bpmndi:BPMNShape id="Activity_12ri1ps_di" bpmnElement="Activity_1t1xgak">
         <dc:Bounds x="1880" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1q2qm7z_di" bpmnElement="Activity_1q2qm7z">
+        <dc:Bounds x="580" y="520" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0nxhg5q_di" bpmnElement="TextAnnotation_0nxhg5q">
         <dc:Bounds x="250" y="630" width="200" height="82" />
       </bpmndi:BPMNShape>
@@ -407,8 +416,8 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
       <bpmndi:BPMNShape id="TextAnnotation_1v69b5z_di" bpmnElement="TextAnnotation_1v69b5z">
         <dc:Bounds x="1260" y="320" width="99.99156545209178" height="29.984817813765183" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1q2qm7z_di" bpmnElement="Activity_1q2qm7z">
-        <dc:Bounds x="580" y="520" width="100" height="80" />
+      <bpmndi:BPMNShape id="TextAnnotation_1jo4qhg_di" bpmnElement="TextAnnotation_1jo4qhg">
+        <dc:Bounds x="680" y="610" width="100" height="68" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_11jkpoc_di" bpmnElement="Association_11jkpoc">
         <di:waypoint x="410" y="575" />
