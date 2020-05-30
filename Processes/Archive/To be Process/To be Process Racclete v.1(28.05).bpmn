@@ -20,20 +20,15 @@
   </bpmn:collaboration>
   <bpmn:process id="Process_Raclette15.05" isExecutable="true">
     <bpmn:startEvent id="Event_1aakghg" name="Message Chatbot Received">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Custinquiry" label="Cust inquiry?" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0u4itb3</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_05ug3yg" messageRef="Message_1d3u5io" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_05ug3yg" messageRef="Message_0zvz4ec" />
     </bpmn:startEvent>
     <bpmn:exclusiveGateway id="Gateway_0u0kx6y" name="Customer Inquiry?">
       <bpmn:incoming>Flow_1xgt3mi</bpmn:incoming>
       <bpmn:outgoing>Flow_0pi4zgv</bpmn:outgoing>
       <bpmn:outgoing>Flow_0ptki5t</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_1f46sgr" name="Ask to Upload Driver License">
+    <bpmn:userTask id="Activity_1f46sgr" name="Ask to Upload Driver License" camunda:candidateGroups="SalesAgent">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="TestDrive" type="boolean" defaultValue="testdriverequested" />
@@ -76,7 +71,7 @@ Recommendation=object.Chat_Test_1;</camunda:script>
       <bpmn:incoming>Flow_0pi4zgv</bpmn:incoming>
       <bpmn:outgoing>Flow_0n8ytry</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_0sxmujp" name="Ask if Test Drive is Desired">
+    <bpmn:userTask id="Activity_0sxmujp" name="Ask if Test Drive is Desired" camunda:candidateGroups="SalesAgent">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="TestDrive" label="Test Drive Desired?" type="boolean" defaultValue="testdrive" />
@@ -93,11 +88,6 @@ Recommendation=object.Chat_Test_1;</camunda:script>
       <bpmn:outgoing>Flow_0l9q5ft</bpmn:outgoing>
       <bpmn:outgoing>Flow_0elkl77</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_0wu8b5z" name="Create Offer">
-      <bpmn:incoming>Flow_193giqc</bpmn:incoming>
-      <bpmn:incoming>Flow_0l9q5ft</bpmn:incoming>
-      <bpmn:outgoing>Flow_1pmitk1</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:exclusiveGateway id="Gateway_0ewemjd" name="OfferAccepted?">
       <bpmn:incoming>Flow_1mmev61</bpmn:incoming>
       <bpmn:outgoing>Flow_19jpek6</bpmn:outgoing>
@@ -107,20 +97,7 @@ Recommendation=object.Chat_Test_1;</camunda:script>
     <bpmn:endEvent id="Event_048zdlm">
       <bpmn:incoming>Flow_0ck9zfb</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_1f3rt78" name="Send Offer">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Offering" type="boolean" defaultValue="offer" />
-        </camunda:formData>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="offer">Yes</camunda:outputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1urk3g9</bpmn:incoming>
-      <bpmn:incoming>Flow_1pmitk1</bpmn:incoming>
-      <bpmn:outgoing>Flow_1mmev61</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="Activity_0orwyg0" name="Change Offer">
+    <bpmn:userTask id="Activity_0orwyg0" name="Change Offer" camunda:candidateGroups="SalesAgent">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="newoffer" type="boolean" defaultValue="newoffer" />
@@ -131,6 +108,14 @@ Recommendation=object.Chat_Test_1;</camunda:script>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0moq91u</bpmn:incoming>
       <bpmn:outgoing>Flow_1urk3g9</bpmn:outgoing>
+      <bpmn:property id="Property_0u8tc1j" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1id2uia">
+        <bpmn:sourceRef>DataObjectReference_069g60p</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0u8tc1j</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1xa4qo7">
+        <bpmn:targetRef>DataObjectReference_0xceqgn</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:userTask id="Activity_1bzfdku" name="Deliver Car">
       <bpmn:incoming>Flow_0t4lbq2</bpmn:incoming>
@@ -139,15 +124,11 @@ Recommendation=object.Chat_Test_1;</camunda:script>
     <bpmn:endEvent id="Event_0j7i47s">
       <bpmn:incoming>Flow_1u49klj</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_1ty1bjc" name="Schedule Test Drive">
+    <bpmn:userTask id="Activity_1ty1bjc" name="Schedule Test Drive" camunda:candidateGroups="SalesAgent">
       <bpmn:incoming>Flow_0snahi7</bpmn:incoming>
       <bpmn:outgoing>Flow_1wo2ztl</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_00l7f01" name="Test Drive">
-      <bpmn:incoming>Flow_1wo2ztl</bpmn:incoming>
-      <bpmn:outgoing>Flow_193giqc</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_1t1xgak" name="Perform face recognition authentication">
+    <bpmn:serviceTask id="Activity_1t1xgak" name="Check face recognition authentication">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -169,10 +150,10 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${testdrive!="Yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0l2c7r6" sourceRef="Activity_0sxmujp" targetRef="Gateway_171glvv" />
-    <bpmn:sequenceFlow id="Flow_0ptki5t" name="TestDrive" sourceRef="Gateway_0u0kx6y" targetRef="Activity_1f46sgr">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry!="ConfigureCar"}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="Flow_0ptki5t" name="Test" sourceRef="Gateway_0u0kx6y" targetRef="Activity_1f46sgr">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry=="TestDrive"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0pi4zgv" name="ConfigureCar" sourceRef="Gateway_0u0kx6y" targetRef="Activity_0k8kbj4">
+    <bpmn:sequenceFlow id="Flow_0pi4zgv" name="Configuration" sourceRef="Gateway_0u0kx6y" targetRef="Activity_0k8kbj4">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${inquiry=="ConfigureCar"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0u4itb3" sourceRef="Event_1aakghg" targetRef="Activity_1q2qm7z" />
@@ -185,27 +166,62 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
     <bpmn:sequenceFlow id="Flow_1pmitk1" sourceRef="Activity_0wu8b5z" targetRef="Activity_1f3rt78" />
     <bpmn:sequenceFlow id="Flow_1mmev61" sourceRef="Activity_1f3rt78" targetRef="Gateway_0ewemjd" />
     <bpmn:sequenceFlow id="Flow_19jpek6" name="Yes" sourceRef="Gateway_0ewemjd" targetRef="Activity_1t1xgak">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${offer=="Yes"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${offeraccepted=="Yes"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0moq91u" name="No" sourceRef="Gateway_0ewemjd" targetRef="Activity_0orwyg0">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${offer!="Yes"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Newoffer=="No"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1u49klj" name="No new offer" sourceRef="Gateway_0ewemjd" targetRef="Event_0j7i47s" />
+    <bpmn:sequenceFlow id="Flow_1u49klj" name="No new offer" sourceRef="Gateway_0ewemjd" targetRef="Event_0j7i47s">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${Nomoreoffer=="No"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0ck9zfb" sourceRef="Activity_1bzfdku" targetRef="Event_048zdlm" />
     <bpmn:sequenceFlow id="Flow_1urk3g9" sourceRef="Activity_0orwyg0" targetRef="Activity_1f3rt78" />
     <bpmn:sequenceFlow id="Flow_0t4lbq2" sourceRef="Activity_1t1xgak" targetRef="Activity_1bzfdku" />
     <bpmn:sequenceFlow id="Flow_1xgt3mi" sourceRef="Activity_1q2qm7z" targetRef="Gateway_0u0kx6y" />
-    <bpmn:userTask id="Activity_1q2qm7z" name="Assign Lead to a Sales Person">
+    <bpmn:userTask id="Activity_00l7f01" name="Test Drive" camunda:candidateGroups="SalesAgent">
+      <bpmn:incoming>Flow_1wo2ztl</bpmn:incoming>
+      <bpmn:outgoing>Flow_193giqc</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1q2qm7z" name="Assign Lead to a Sales Person" camunda:candidateGroups="SalesAgent">
       <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="inquiry">ConfigureCar</camunda:outputParameter>
-        </camunda:inputOutput>
         <camunda:formData>
-          <camunda:formField id="CustomerInquiry" label="Customer Inquiry?" type="boolean" defaultValue="inquiry" />
+          <camunda:formField id="inquiry" label="Customer inquiry?" type="enum" defaultValue="ConfigureCar">
+            <camunda:value id="ConfigureCar" name="ConfigureCar" />
+            <camunda:value id="TestDrive" name="TestDrive" />
+          </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0u4itb3</bpmn:incoming>
       <bpmn:outgoing>Flow_1xgt3mi</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:dataObjectReference id="DataObjectReference_069g60p" name="First offer" dataObjectRef="DataObject_1yoc6ei" />
+    <bpmn:dataObject id="DataObject_1yoc6ei" />
+    <bpmn:dataObjectReference id="DataObjectReference_0xceqgn" name="New offer" dataObjectRef="DataObject_0g7p209" />
+    <bpmn:dataObject id="DataObject_0g7p209" />
+    <bpmn:userTask id="Activity_0wu8b5z" name="Create Offer">
+      <bpmn:incoming>Flow_193giqc</bpmn:incoming>
+      <bpmn:incoming>Flow_0l9q5ft</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pmitk1</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_01mfb0o">
+        <bpmn:targetRef>DataObjectReference_069g60p</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1f3rt78" name="Send Offer">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="Newoffer">No</camunda:outputParameter>
+          <camunda:outputParameter name="Nomoreoffer">No</camunda:outputParameter>
+          <camunda:outputParameter name="offeraccepted">Yes</camunda:outputParameter>
+        </camunda:inputOutput>
+        <camunda:formData>
+          <camunda:formField id="OfferAccepted" label="Offer Accepted?" type="string" defaultValue="Yes" />
+          <camunda:formField id="Newoffer" label="New Offer?" type="string" defaultValue="No" />
+          <camunda:formField id="Nonewoffer" label="No new offer" type="string" defaultValue="No" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1pmitk1</bpmn:incoming>
+      <bpmn:incoming>Flow_1urk3g9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mmev61</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_0nxhg5q">
       <bpmn:text>Customer configures car or request test drive via SirChatALot, service stores chatbot-data in Dialog Flow and sends a message to the closest dealer.</bpmn:text>
@@ -233,14 +249,14 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
     <bpmn:association id="Association_1jmllml" sourceRef="Gateway_0u0kx6y" targetRef="TextAnnotation_1jo4qhg" />
   </bpmn:process>
   <bpmn:message id="Message_0ccs1cv" name="MessageChatbotReceived" />
-  <bpmn:message id="Message_1d3u5io" name="Message_1moq0e3" />
+  <bpmn:message id="Message_0zvz4ec" name="Message_SirChatAlot" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_10dglfq">
       <bpmndi:BPMNShape id="Participant_0thxx78_di" bpmnElement="Participant_0thxx78" isHorizontal="true" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="170" y="290" width="2130" height="510" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1xgt3mi_di" bpmnElement="Flow_1xgt3mi">
-        <di:waypoint x="650" y="560" />
+        <di:waypoint x="640" y="560" />
         <di:waypoint x="785" y="560" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0t4lbq2_di" bpmnElement="Flow_0t4lbq2">
@@ -248,8 +264,8 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
         <di:waypoint x="2040" y="540" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1urk3g9_di" bpmnElement="Flow_1urk3g9">
-        <di:waypoint x="1712" y="380" />
-        <di:waypoint x="1570" y="380" />
+        <di:waypoint x="1662" y="420" />
+        <di:waypoint x="1570" y="420" />
         <di:waypoint x="1570" y="500" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ck9zfb_di" bpmnElement="Flow_0ck9zfb">
@@ -309,7 +325,7 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0u4itb3_di" bpmnElement="Flow_0u4itb3">
         <di:waypoint x="438" y="560" />
-        <di:waypoint x="550" y="560" />
+        <di:waypoint x="540" y="560" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pi4zgv_di" bpmnElement="Flow_0pi4zgv" bioc:stroke="rgb(229, 57, 53)" bioc:fill="rgb(255, 205, 210)">
         <di:waypoint x="810" y="585" />
@@ -324,7 +340,7 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
         <di:waypoint x="810" y="420" />
         <di:waypoint x="920" y="420" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="843" y="402" width="46" height="14" />
+          <dc:Bounds x="855" y="402" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0l2c7r6_di" bpmnElement="Flow_0l2c7r6">
@@ -370,9 +386,6 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
           <dc:Bounds x="1262" y="706" width="56" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_18ioe03_di" bpmnElement="Activity_0wu8b5z">
-        <dc:Bounds x="1340" y="500" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0ewemjd_di" bpmnElement="Gateway_0ewemjd" isMarkerVisible="true">
         <dc:Bounds x="1687" y="515" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -381,9 +394,6 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_048zdlm_di" bpmnElement="Event_048zdlm">
         <dc:Bounds x="2172" y="522" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1f3rt78_di" bpmnElement="Activity_1f3rt78">
-        <dc:Bounds x="1520" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0orwyg0_di" bpmnElement="Activity_0orwyg0">
         <dc:Bounds x="1662" y="380" width="100" height="80" />
@@ -397,11 +407,11 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
       <bpmndi:BPMNShape id="Activity_0zwe6zn_di" bpmnElement="Activity_1ty1bjc">
         <dc:Bounds x="1160" y="380" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_18oz7tb_di" bpmnElement="Activity_00l7f01">
-        <dc:Bounds x="1340" y="380" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_12ri1ps_di" bpmnElement="Activity_1t1xgak">
         <dc:Bounds x="1880" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_006h6vn_di" bpmnElement="Activity_00l7f01">
+        <dc:Bounds x="1340" y="380" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0nxhg5q_di" bpmnElement="TextAnnotation_0nxhg5q">
         <dc:Bounds x="250" y="630" width="200" height="82" />
@@ -422,7 +432,25 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
         <dc:Bounds x="680" y="610" width="100" height="68" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1q2qm7z_di" bpmnElement="Activity_1q2qm7z">
-        <dc:Bounds x="550" y="520" width="100" height="80" />
+        <dc:Bounds x="540" y="520" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_069g60p_di" bpmnElement="DataObjectReference_069g60p">
+        <dc:Bounds x="1462" y="595" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1458" y="652" width="47" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0xceqgn_di" bpmnElement="DataObjectReference_0xceqgn">
+        <dc:Bounds x="1812" y="325" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1804" y="303" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qo8wk4_di" bpmnElement="Activity_0wu8b5z">
+        <dc:Bounds x="1340" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1331rdi_di" bpmnElement="Activity_1f3rt78">
+        <dc:Bounds x="1520" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_11jkpoc_di" bpmnElement="Association_11jkpoc">
         <di:waypoint x="410" y="575" />
@@ -471,12 +499,12 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
         <di:waypoint x="1532" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0oxgggb_di" bpmnElement="Flow_0oxgggb">
-        <di:waypoint x="1960" y="240" />
-        <di:waypoint x="1960" y="500" />
+        <di:waypoint x="1940" y="240" />
+        <di:waypoint x="1940" y="500" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1wiiip4_di" bpmnElement="Flow_1wiiip4">
-        <di:waypoint x="1900" y="500" />
-        <di:waypoint x="1900" y="240" />
+        <di:waypoint x="1920" y="500" />
+        <di:waypoint x="1920" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1od0pv2_di" bpmnElement="Flow_1od0pv2">
         <di:waypoint x="2082" y="500" />
@@ -505,6 +533,23 @@ Identifiziert=object.Chat_Test_1;</camunda:script>
       <bpmndi:BPMNEdge id="Flow_0vbhyc9_di" bpmnElement="Flow_0vbhyc9">
         <di:waypoint x="1220" y="240" />
         <di:waypoint x="1220" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_01mfb0o_di" bpmnElement="DataOutputAssociation_01mfb0o">
+        <di:waypoint x="1420" y="580" />
+        <di:waypoint x="1420" y="630" />
+        <di:waypoint x="1462" y="630" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1id2uia_di" bpmnElement="DataInputAssociation_1id2uia">
+        <di:waypoint x="1498" y="620" />
+        <di:waypoint x="1670" y="620" />
+        <di:waypoint x="1670" y="490" />
+        <di:waypoint x="1700" y="490" />
+        <di:waypoint x="1700" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1xa4qo7_di" bpmnElement="DataOutputAssociation_1xa4qo7">
+        <di:waypoint x="1762" y="420" />
+        <di:waypoint x="1828" y="420" />
+        <di:waypoint x="1828" y="375" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
