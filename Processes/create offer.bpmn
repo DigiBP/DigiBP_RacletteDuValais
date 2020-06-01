@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_0m8tsdd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:process id="Create_offer_TESTED" isExecutable="true">
+    <bpmn:serviceTask id="Activity_0mrkgdw" name="Create Offer">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/qu6renlr1en5mgngkgohvcbl0jr1sdpj</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
+        "responseid": responseid
+});</camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0zq8lnt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zpvt6c</bpmn:outgoing>
+      <bpmn:property id="Property_06qwt1y" name="__targetRef_placeholder" />
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_16lic5a">
+      <bpmn:incoming>Flow_0zpvt6c</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0zpvt6c" sourceRef="Activity_0mrkgdw" targetRef="Event_16lic5a" />
+    <bpmn:startEvent id="Event_1c6y6lq">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="responseid" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0zq8lnt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0zq8lnt" sourceRef="Event_1c6y6lq" targetRef="Activity_0mrkgdw" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Create_offer_TESTED">
+      <bpmndi:BPMNEdge id="Flow_0zq8lnt_di" bpmnElement="Flow_0zq8lnt">
+        <di:waypoint x="198" y="120" />
+        <di:waypoint x="280" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zpvt6c_di" bpmnElement="Flow_0zpvt6c">
+        <di:waypoint x="380" y="120" />
+        <di:waypoint x="442" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0mrkgdw_di" bpmnElement="Activity_0mrkgdw" bioc:stroke="black" bioc:fill="white">
+        <dc:Bounds x="280" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_16lic5a_di" bpmnElement="Event_16lic5a">
+        <dc:Bounds x="442" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1c6y6lq_di" bpmnElement="Event_1c6y6lq">
+        <dc:Bounds x="162" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

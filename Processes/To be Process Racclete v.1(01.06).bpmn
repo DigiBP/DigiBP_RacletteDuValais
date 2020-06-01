@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_14296gp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
   <bpmn:collaboration id="Collaboration_10dglfq">
-    <bpmn:participant id="Participant_0thxx78" name="Dealer" processRef="Process_Raclette15.05" />
+    <bpmn:participant id="Participant_0thxx78" name="Dealer" processRef="Process_Raclette_01.06" />
     <bpmn:participant id="Participant_01628kg" name="Customer" />
     <bpmn:participant id="Participant_022tpbc" name="Sir ChatALot" />
     <bpmn:messageFlow id="Flow_1hums32" sourceRef="Participant_01628kg" targetRef="Participant_022tpbc" />
@@ -17,7 +17,7 @@
     <bpmn:messageFlow id="Flow_0vbhyc9" sourceRef="Participant_01628kg" targetRef="Activity_1ty1bjc" />
     <bpmn:messageFlow id="Flow_0xum6v8" sourceRef="Participant_01628kg" targetRef="Activity_1pr6dqj" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_Raclette15.05" isExecutable="true">
+  <bpmn:process id="Process_Raclette_01.06" isExecutable="true">
     <bpmn:startEvent id="Event_1aakghg" name="Message Chatbot Received">
       <bpmn:outgoing>Flow_0u4itb3</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_05ug3yg" messageRef="Message_0zvz4ec" />
