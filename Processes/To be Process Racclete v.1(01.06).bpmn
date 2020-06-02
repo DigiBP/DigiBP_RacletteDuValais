@@ -113,13 +113,13 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0snahi7" sourceRef="Activity_1f46sgr" targetRef="Activity_1ty1bjc" />
     <bpmn:sequenceFlow id="Flow_19jpek6" name="Yes" sourceRef="Gateway_0ewemjd" targetRef="Activity_0nj99aw">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${offerdecision=="accepted"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${OfferDecision=="accepted"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0moq91u" name="No" sourceRef="Gateway_0ewemjd" targetRef="Activity_0orwyg0">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${offerdecision=="Noaccepted"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${OfferDecision=="Noaccepted"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1u49klj" name="No new offer" sourceRef="Gateway_0ewemjd" targetRef="Event_0j7i47s">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${offerdecision=="Nonewoffer"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${OfferDecision=="Nonewoffer"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0ck9zfb" sourceRef="Activity_1bzfdku" targetRef="Event_048zdlm" />
     <bpmn:sequenceFlow id="Flow_1xgt3mi" sourceRef="Activity_1q2qm7z" targetRef="Gateway_0u0kx6y" />
