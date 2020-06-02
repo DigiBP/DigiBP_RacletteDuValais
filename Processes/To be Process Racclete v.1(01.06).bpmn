@@ -19,6 +19,12 @@
   </bpmn:collaboration>
   <bpmn:process id="Process_Raclette15.05" isExecutable="true">
     <bpmn:startEvent id="Event_1aakghg" name="Message Chatbot Received">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Configuration" type="string" />
+          <camunda:formField id="TestDrive" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0u4itb3</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_05ug3yg" messageRef="Message_0zvz4ec" />
     </bpmn:startEvent>

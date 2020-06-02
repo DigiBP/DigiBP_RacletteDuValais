@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_04hjd3q" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:message id="Message_0b2doml" name="MessageInitialTest" />
+  <bpmn:message id="Message_1dqozjt" />
+  <bpmn:message id="Message_0o0k7i9" name="bMessage" />
+  <bpmn:collaboration id="StartMessage">
+    <bpmn:participant id="Participant_0gcv6ls" processRef="Process_Initial_Conversation" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_Initial_Conversation" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_185uvie" />
+    <bpmn:sequenceFlow id="flowYes" sourceRef="gateway" targetRef="endEventYes">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${testDrive != "no"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0t70k1e" sourceRef="se_Message" targetRef="gateway" />
+    <bpmn:startEvent id="se_Message" name="MessageChatbotReceived">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="cars" type="string" />
+          <camunda:formField id="testDrive" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0t70k1e</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_0b2doml" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="gateway">
+      <bpmn:incoming>SequenceFlow_0t70k1e</bpmn:incoming>
+      <bpmn:outgoing>flowYes</bpmn:outgoing>
+      <bpmn:outgoing>flowNo</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="endEventYes">
+      <bpmn:incoming>flowYes</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="endEventNo" name="endMessage">
+      <bpmn:incoming>SequenceFlow_1gy9wj2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="flowNo" sourceRef="gateway" targetRef="Task_0uce858">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${testDrive == "no"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1gy9wj2" sourceRef="Task_0uce858" targetRef="endEventNo" />
+    <bpmn:userTask id="Task_0uce858">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="cars" type="string" />
+          <camunda:formField id="testDrive" type="string" />
+          <camunda:formField id="inquiry" type="long" defaultValue="${execution.getinquiry()}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flowNo</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1gy9wj2</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="StartMessage">
+      <bpmndi:BPMNShape id="Participant_0gcv6ls_di" bpmnElement="Participant_0gcv6ls" isHorizontal="true">
+        <dc:Bounds x="140" y="80" width="700" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1gy9wj2_di" bpmnElement="SequenceFlow_1gy9wj2">
+        <di:waypoint x="560" y="170" />
+        <di:waypoint x="632" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_08yzig1_di" bpmnElement="flowNo">
+        <di:waypoint x="395" y="170" />
+        <di:waypoint x="460" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0t70k1e_di" bpmnElement="SequenceFlow_0t70k1e">
+        <di:waypoint x="268" y="170" />
+        <di:waypoint x="345" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1l4shmx_di" bpmnElement="flowYes">
+        <di:waypoint x="370" y="195" />
+        <di:waypoint x="370" y="232" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_0s8awst_di" bpmnElement="se_Message">
+        <dc:Bounds x="232" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="209" y="195" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0xldbmg_di" bpmnElement="gateway" isMarkerVisible="true">
+        <dc:Bounds x="345" y="145" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0blztbd_di" bpmnElement="endEventYes">
+        <dc:Bounds x="352" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1sbf7rb_di" bpmnElement="endEventNo">
+        <dc:Bounds x="632" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="619" y="122" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0t8pft0_di" bpmnElement="Task_0uce858">
+        <dc:Bounds x="460" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
