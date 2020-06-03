@@ -201,9 +201,9 @@ Recommendation=object.Chat_Test_1;</camunda:script>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/ti7wtdy2bjnfiv1gu2b16n51pswdrjtl</camunda:inputParameter>
-            <camunda:outputParameter name="NameVerification">
+            <camunda:outputParameter name="Verification">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
-NameVerification=object.Chat_Test_1;</camunda:script>
+Verification=object.Chat_Test_1;</camunda:script>
             </camunda:outputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
@@ -217,7 +217,9 @@ NameVerification=object.Chat_Test_1;</camunda:script>
       <bpmn:outgoing>Flow_0br92ym</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1ipbl0j" sourceRef="Activity_00l7f01" targetRef="Activity_0q05inu" />
-    <bpmn:sequenceFlow id="Flow_03mm8km" sourceRef="Gateway_171glvv" targetRef="Activity_0q05inu" />
+    <bpmn:sequenceFlow id="Flow_03mm8km" name="No" sourceRef="Gateway_171glvv" targetRef="Activity_0q05inu">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${testdrive=="No"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1xgt3mi" sourceRef="Activity_1q2qm7z" targetRef="Gateway_0u0kx6y" />
     <bpmn:sequenceFlow id="Flow_0ck9zfb" sourceRef="Activity_1bzfdku" targetRef="Event_048zdlm" />
     <bpmn:sequenceFlow id="Flow_1u49klj" name="No new offer" sourceRef="Gateway_0ewemjd" targetRef="Event_0j7i47s">
@@ -397,6 +399,9 @@ NameVerification=object.Chat_Test_1;</camunda:script>
         <di:waypoint x="1305" y="671" />
         <di:waypoint x="1380" y="671" />
         <di:waypoint x="1380" y="580" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1335" y="653" width="15" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ipbl0j_di" bpmnElement="Flow_1ipbl0j">
         <di:waypoint x="1380" y="460" />
