@@ -1,0 +1,1663 @@
+{
+    "name": "Email Response From Customer (proved02.06)",
+    "flow": [
+        {
+            "id": 40,
+            "module": "gateway:CustomMailHook",
+            "version": 1,
+            "parameters": {
+                "hook": 408681,
+                "maxResults": 2
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 450
+                },
+                "restore": {
+                    "hook": {
+                        "label": "Email from Customer"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook",
+                        "label": "Mailhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "regexp:Parser",
+            "version": 1,
+            "parameters": {
+                "global": false,
+                "pattern": "(I accepted your offer)",
+                "multiline": false,
+                "sensitive": false,
+                "singleline": false,
+                "continueWhenNoRes": true
+            },
+            "mapper": {
+                "text": "{{40.text}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 450
+                },
+                "parameters": [
+                    {
+                        "name": "pattern",
+                        "type": "text",
+                        "label": "Pattern",
+                        "required": true
+                    },
+                    {
+                        "name": "global",
+                        "type": "boolean",
+                        "label": "Global match",
+                        "required": true
+                    },
+                    {
+                        "name": "sensitive",
+                        "type": "boolean",
+                        "label": "Case sensitive",
+                        "required": true
+                    },
+                    {
+                        "name": "multiline",
+                        "type": "boolean",
+                        "label": "Multiline",
+                        "required": true
+                    },
+                    {
+                        "name": "singleline",
+                        "type": "boolean",
+                        "label": "Singleline",
+                        "required": true
+                    },
+                    {
+                        "name": "continueWhenNoRes",
+                        "type": "boolean",
+                        "label": "Continue the execution of the route even if the module finds no matches",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "$1",
+                        "type": "text",
+                        "label": "$1"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 64,
+            "module": "util:SetVariable",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Accepted",
+                "scope": "roundtrip",
+                "value": "{{4.`$1`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 493,
+                    "y": 798
+                },
+                "restore": {
+                    "scope": {
+                        "label": "One cycle"
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Accepted"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 65,
+            "module": "regexp:Parser",
+            "version": 1,
+            "parameters": {
+                "global": false,
+                "pattern": "(I do not accept your offer)",
+                "multiline": false,
+                "sensitive": false,
+                "singleline": false,
+                "continueWhenNoRes": true
+            },
+            "mapper": {
+                "text": "{{40.text}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 802,
+                    "y": 912
+                },
+                "parameters": [
+                    {
+                        "name": "pattern",
+                        "type": "text",
+                        "label": "Pattern",
+                        "required": true
+                    },
+                    {
+                        "name": "global",
+                        "type": "boolean",
+                        "label": "Global match",
+                        "required": true
+                    },
+                    {
+                        "name": "sensitive",
+                        "type": "boolean",
+                        "label": "Case sensitive",
+                        "required": true
+                    },
+                    {
+                        "name": "multiline",
+                        "type": "boolean",
+                        "label": "Multiline",
+                        "required": true
+                    },
+                    {
+                        "name": "singleline",
+                        "type": "boolean",
+                        "label": "Singleline",
+                        "required": true
+                    },
+                    {
+                        "name": "continueWhenNoRes",
+                        "type": "boolean",
+                        "label": "Continue the execution of the route even if the module finds no matches",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "$1",
+                        "type": "text",
+                        "label": "$1"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 66,
+            "module": "util:SetVariable",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "NoAccepted",
+                "scope": "roundtrip",
+                "value": "{{65.`$1`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1069,
+                    "y": 987
+                },
+                "restore": {
+                    "scope": {
+                        "label": "One cycle"
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "NoAccepted"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 67,
+            "module": "regexp:Parser",
+            "version": 1,
+            "parameters": {
+                "global": false,
+                "pattern": "(not to send me a new offer)",
+                "multiline": false,
+                "sensitive": false,
+                "singleline": false,
+                "continueWhenNoRes": true
+            },
+            "mapper": {
+                "text": "{{40.text}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1347,
+                    "y": 1059
+                },
+                "parameters": [
+                    {
+                        "name": "pattern",
+                        "type": "text",
+                        "label": "Pattern",
+                        "required": true
+                    },
+                    {
+                        "name": "global",
+                        "type": "boolean",
+                        "label": "Global match",
+                        "required": true
+                    },
+                    {
+                        "name": "sensitive",
+                        "type": "boolean",
+                        "label": "Case sensitive",
+                        "required": true
+                    },
+                    {
+                        "name": "multiline",
+                        "type": "boolean",
+                        "label": "Multiline",
+                        "required": true
+                    },
+                    {
+                        "name": "singleline",
+                        "type": "boolean",
+                        "label": "Singleline",
+                        "required": true
+                    },
+                    {
+                        "name": "continueWhenNoRes",
+                        "type": "boolean",
+                        "label": "Continue the execution of the route even if the module finds no matches",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "$1",
+                        "type": "text",
+                        "label": "$1"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 68,
+            "module": "util:SetVariable",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Nonewoffer",
+                "scope": "roundtrip",
+                "value": "{{67.`$1`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1650,
+                    "y": 1118
+                },
+                "restore": {
+                    "scope": {
+                        "label": "One cycle"
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Nonewoffer"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 69,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 1934,
+                    "y": 1267
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 70,
+                            "module": "util:SetVariable",
+                            "version": 1,
+                            "parameters": {},
+                            "filter": {
+                                "name": "",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{64.value}}",
+                                            "b": "I accepted your offer",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "name": "OutputAccepted",
+                                "scope": "roundtrip",
+                                "value": "accepted"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2234,
+                                    "y": 817
+                                },
+                                "restore": {
+                                    "scope": {
+                                        "label": "One cycle"
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "OutputAccepted"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 51,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "https://digibp-raclette-du-valais.herokuapp.com/rest/message",
+                                "data": "{\"messageName\" : \"Message_offer\",\n\"processVariables\" : {\n    \"OfferDecision\" : {\"value\" : {{70.value}}, \"type\": \"string\"}\n}\n}",
+                                "gzip": true,
+                                "method": "post",
+                                "headers": [],
+                                "timeout": "",
+                                "authPass": "",
+                                "authUser": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "shareCookies": false,
+                                "parseResponse": false,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "followAllRedirects": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2773,
+                                    "y": 987
+                                },
+                                "restore": {
+                                    "qs": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "method": {
+                                        "mode": "chose",
+                                        "label": "POST"
+                                    },
+                                    "headers": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "bodyType": {
+                                        "label": "Raw"
+                                    },
+                                    "contentType": {
+                                        "label": "JSON (application/json)"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "labels": {
+                                            "add": "Add a header",
+                                            "edit": "Edit a header"
+                                        }
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "labels": {
+                                            "add": "Add parameter",
+                                            "edit": "Edit parameter"
+                                        }
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 71,
+                            "module": "util:SetVariable",
+                            "version": 1,
+                            "parameters": {},
+                            "filter": {
+                                "name": "",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{66.value}}",
+                                            "b": "I do not accept your offer",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "name": "OutputNoAccepted",
+                                "scope": "roundtrip",
+                                "value": "Noaccepted"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2234,
+                                    "y": 1117
+                                },
+                                "restore": {
+                                    "scope": {
+                                        "label": "One cycle"
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "OutputNoAccepted"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 53,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "https://digibp-raclette-du-valais.herokuapp.com/rest/message",
+                                "data": "{\"messageName\" : \"Message_offer\",\n\"processVariables\" : {\n    \"OfferDecision\" : {\"value\" : {{71.value}}, \"type\": \"string\"}\n}\n}",
+                                "gzip": true,
+                                "method": "post",
+                                "headers": [],
+                                "timeout": "",
+                                "authPass": "",
+                                "authUser": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "shareCookies": false,
+                                "parseResponse": false,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "followAllRedirects": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2787,
+                                    "y": 1268
+                                },
+                                "restore": {
+                                    "qs": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "method": {
+                                        "mode": "chose",
+                                        "label": "POST"
+                                    },
+                                    "headers": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "bodyType": {
+                                        "label": "Raw"
+                                    },
+                                    "contentType": {
+                                        "label": "JSON (application/json)"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "labels": {
+                                            "add": "Add a header",
+                                            "edit": "Edit a header"
+                                        }
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "labels": {
+                                            "add": "Add parameter",
+                                            "edit": "Edit parameter"
+                                        }
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 72,
+                            "module": "util:SetVariable",
+                            "version": 1,
+                            "parameters": {},
+                            "filter": {
+                                "name": "",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{68.value}}",
+                                            "b": "not to send me a new offer",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "name": "OutputNonewoffer",
+                                "scope": "roundtrip",
+                                "value": "Nonewoffer"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2234,
+                                    "y": 1417
+                                },
+                                "restore": {
+                                    "scope": {
+                                        "label": "One cycle"
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "OutputNonewoffer"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 41,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "https://digibp-raclette-du-valais.herokuapp.com/rest/message",
+                                "data": "{\"messageName\" : \"Message_offer\",\n\"processVariables\" : {\n    \"OfferDecision\" : {\"value\" : {{72.value}}, \"type\": \"string\"}\n}\n}",
+                                "gzip": true,
+                                "method": "post",
+                                "headers": [],
+                                "timeout": "",
+                                "authPass": "",
+                                "authUser": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "shareCookies": false,
+                                "parseResponse": false,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "followAllRedirects": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2782,
+                                    "y": 1563
+                                },
+                                "restore": {
+                                    "qs": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "method": {
+                                        "mode": "chose",
+                                        "label": "POST"
+                                    },
+                                    "headers": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "bodyType": {
+                                        "label": "Raw"
+                                    },
+                                    "contentType": {
+                                        "label": "JSON (application/json)"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "labels": {
+                                            "add": "Add a header",
+                                            "edit": "Edit a header"
+                                        }
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "labels": {
+                                            "add": "Add parameter",
+                                            "edit": "Edit parameter"
+                                        }
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 73,
+                            "module": "util:SetVariable",
+                            "version": 1,
+                            "parameters": {},
+                            "filter": {
+                                "name": "",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{64.value}}",
+                                            "b": "I accepted your offer",
+                                            "o": "text:notequal"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "a": "{{66.value}}",
+                                            "b": "I do not accept your offer",
+                                            "o": "text:notequal"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "a": "{{68.value}}",
+                                            "b": "not to send me a new offer",
+                                            "o": "text:notequal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "name": "OutputHuman",
+                                "scope": "roundtrip",
+                                "value": "CheckEmail"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2251,
+                                    "y": 1690
+                                },
+                                "restore": {
+                                    "scope": {
+                                        "label": "One cycle"
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "OutputHuman"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 74,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "https://digibp-raclette-du-valais.herokuapp.com/rest/message",
+                                "data": "{\"messageName\" : \"Message_offer\",\n\"processVariables\" : {\n    \"OfferDecision\" : {\"value\" : {{73.value}}, \"type\": \"string\"}\n}\n}",
+                                "gzip": true,
+                                "method": "post",
+                                "headers": [],
+                                "timeout": "",
+                                "authPass": "",
+                                "authUser": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "shareCookies": false,
+                                "parseResponse": false,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "followAllRedirects": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2792,
+                                    "y": 1836
+                                },
+                                "restore": {
+                                    "qs": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "method": {
+                                        "mode": "chose",
+                                        "label": "POST"
+                                    },
+                                    "headers": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "bodyType": {
+                                        "label": "Raw"
+                                    },
+                                    "contentType": {
+                                        "label": "JSON (application/json)"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "labels": {
+                                            "add": "Add a header",
+                                            "edit": "Edit a header"
+                                        }
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "labels": {
+                                            "add": "Add parameter",
+                                            "edit": "Edit parameter"
+                                        }
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": false,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.integromat.com"
+    }
+}

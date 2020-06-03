@@ -1,0 +1,1072 @@
+{
+    "name": "Create Offer + Email (proved01.06) (copy)",
+    "flow": [
+        {
+            "id": 56,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 407751,
+                "maxResults": 2
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "hook": {
+                        "label": "Create PDF"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface": []
+            }
+        },
+        {
+            "id": 40,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 1133828
+            },
+            "mapper": {
+                "limit": "1",
+                "filter": [
+                    [
+                        {
+                            "a": "B",
+                            "b": "{{56.responseid}}",
+                            "o": "text:equal"
+                        }
+                    ]
+                ],
+                "sheetId": "Incoming_OfferInquiry",
+                "sortOrder": "asc",
+                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "orderBy": {
+                        "mode": "chose",
+                        "label": ""
+                    },
+                    "sheetId": {
+                        "mode": "chose",
+                        "label": "Incoming_OfferInquiry"
+                    },
+                    "sortOrder": {
+                        "mode": "chose",
+                        "label": "Ascending"
+                    },
+                    "__IMTCONN__": {
+                        "label": "GoogleSheet (raclettedgbp@gmail.com)"
+                    },
+                    "spreadsheetId": {
+                        "mode": "chose",
+                        "label": "Chat_Test_1"
+                    },
+                    "tableFirstRow": {
+                        "label": "A-Z"
+                    },
+                    "includesHeaders": {
+                        "mode": "chose",
+                        "label": "Yes"
+                    },
+                    "valueRenderOption": {
+                        "mode": "chose",
+                        "label": "Formatted value"
+                    },
+                    "dateTimeRenderOption": {
+                        "mode": "chose",
+                        "label": "Formatted string"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet",
+                        "required": true
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "number",
+                        "label": "Maximum number of returned rows"
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": {
+                            "store": "rpc://google-sheets@2/rpcGetFilterKeys?includesHeaders=true"
+                        }
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "DateTime (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "ChatID (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "FirstName (C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "LastName (D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "ZIP (E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "City (F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "Email (G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "RecommendDealer (H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "Index (I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "Longitude (J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "Latitude (K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "Employee (M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "Price (N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "Model (O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "OfferDecision (P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 34,
+            "module": "webmerge:mergedocument",
+            "version": 1,
+            "parameters": {
+                "download": "url",
+                "__IMTCONN__": 1259404
+            },
+            "mapper": {
+                "date": "{{40.`0`}}",
+                "Model": "{{40.`14`}}",
+                "Offer": "",
+                "price": "{{40.`13`}}",
+                "title": "Mr.",
+                "Company": "{{40.`7`}}",
+                "LastName": "{{40.`3`}}",
+                "document": "618345",
+                "FirstName": "{{40.`2`}}",
+                "Signature": "",
+                "kmodometer": "0",
+                "EmployeeName": "{{40.`12`}}",
+                "employeeName": "{{40.`12`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "document": {
+                        "label": "AMAG offer"
+                    },
+                    "download": {
+                        "mode": "chose",
+                        "label": "Yes"
+                    },
+                    "__IMTCONN__": {
+                        "label": "AMAG offer"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "download",
+                        "type": "select",
+                        "label": "Download Document?",
+                        "validate": {
+                            "enum": [
+                                "url",
+                                "0"
+                            ]
+                        }
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "document",
+                        "type": "select",
+                        "label": "Document",
+                        "required": true
+                    },
+                    {
+                        "name": "Offer",
+                        "type": "text"
+                    },
+                    {
+                        "name": "date",
+                        "type": "text"
+                    },
+                    {
+                        "name": "employeeName",
+                        "type": "text"
+                    },
+                    {
+                        "name": "FirstName",
+                        "type": "text"
+                    },
+                    {
+                        "name": "LastName",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Model",
+                        "type": "text"
+                    },
+                    {
+                        "name": "price",
+                        "type": "text"
+                    },
+                    {
+                        "name": "kmodometer",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Signature",
+                        "type": "text"
+                    },
+                    {
+                        "name": "title",
+                        "type": "text"
+                    },
+                    {
+                        "name": "EmployeeName",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Company",
+                        "type": "text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 43,
+            "module": "http:ActionGetFile",
+            "version": 3,
+            "parameters": {
+                "handleErrors": false
+            },
+            "mapper": {
+                "url": "{{34.url}}",
+                "method": "get",
+                "shareCookies": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "hidden",
+                        "label": "Method"
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 44,
+            "module": "email:ActionSendEmail",
+            "version": 6,
+            "parameters": {
+                "account": 1259975,
+                "saveAfterSent": false
+            },
+            "mapper": {
+                "to": [
+                    "{{40.`6`}}"
+                ],
+                "subject": "Offer Model {{40.`14`}}",
+                "contentType": "html",
+                "attachments": [
+                    {
+                        "cid": "",
+                        "data": "{{43.data}}",
+                        "fileName": "{{43.fileName}}"
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "sender": "",
+                "replyTo": "",
+                "inReplyTo": "",
+                "references": [],
+                "priority": "normal",
+                "headers": [],
+                "from": "",
+                "html": "Dear Customer {{40.`2`}} {{40.`3`}},\n\nEnclosed, you will find our offer for the model {{40.`14`}} you solicited. \n\nPlease, send me an email back with your decision, whether you would accept the offer, would like a second offer, or would not like any offer.\n\nIn case you agree to the offer, please click the following link to virtually sign the offer:\n\nhttps://virabile.myhostpoint.ch/identification.php\n\nThank you, I am looking forward to hearing from you again.\n\nBest regards,\n\n {{40.`12`}}from {{40.`7`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                },
+                "restore": {
+                    "account": {
+                        "label": "My Google connection (raclettedgbp@gmail.com)"
+                    },
+                    "saveAfterSent": {
+                        "label": "No"
+                    },
+                    "to": {
+                        "mode": "chose",
+                        "items": [
+                            "undefined"
+                        ]
+                    },
+                    "contentType": {
+                        "label": "HTML"
+                    },
+                    "attachments": {
+                        "mode": "chose",
+                        "items": [
+                            "undefined"
+                        ]
+                    },
+                    "cc": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "bcc": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "references": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "priority": {
+                        "label": "Normal"
+                    },
+                    "headers": {
+                        "items": []
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "label": "Connection",
+                        "type": "account",
+                        "required": true
+                    },
+                    {
+                        "name": "saveAfterSent",
+                        "label": "Save message after sending",
+                        "type": "select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "to",
+                        "label": "To",
+                        "type": "array",
+                        "required": true,
+                        "labels": {
+                            "add": "Add a recipient",
+                            "edit": "Edit a recipient"
+                        },
+                        "spec": {
+                            "name": "email",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "subject",
+                        "label": "Subject",
+                        "type": "text"
+                    },
+                    {
+                        "name": "contentType",
+                        "label": "Content Type",
+                        "type": "select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "html",
+                                "text"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "attachments",
+                        "label": "Attachments",
+                        "type": "array",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "label": "File name",
+                                "type": "filename",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "label": "Data",
+                                "type": "buffer",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "label": "Content-ID",
+                                "type": "text"
+                            }
+                        ],
+                        "labels": {
+                            "add": "Add an attachment",
+                            "edit": "Edit an attachment"
+                        }
+                    },
+                    {
+                        "name": "cc",
+                        "label": "Copy recipient",
+                        "type": "array",
+                        "labels": {
+                            "add": "Add a copy recipient",
+                            "edit": "Edit a copy recipient"
+                        },
+                        "spec": {
+                            "name": "email",
+                            "type": "email",
+                            "label": "Email address"
+                        }
+                    },
+                    {
+                        "name": "bcc",
+                        "label": "Blind copy recipient",
+                        "type": "array",
+                        "labels": {
+                            "add": "Add a blind copy recipient",
+                            "edit": "Edit a blind copy recipient"
+                        },
+                        "spec": {
+                            "name": "email",
+                            "type": "email",
+                            "label": "Email address"
+                        }
+                    },
+                    {
+                        "name": "sender",
+                        "label": "Sender",
+                        "type": "email"
+                    },
+                    {
+                        "name": "replyTo",
+                        "label": "Reply-To",
+                        "type": "text"
+                    },
+                    {
+                        "name": "inReplyTo",
+                        "label": "In-Reply-To",
+                        "type": "text"
+                    },
+                    {
+                        "name": "references",
+                        "label": "References",
+                        "type": "array",
+                        "spec": {
+                            "type": "text",
+                            "label": "Reference",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "priority",
+                        "label": "Priority",
+                        "type": "select",
+                        "validate": {
+                            "enum": [
+                                "high",
+                                "normal",
+                                "low"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "label": "Headers",
+                        "type": "array",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "label": "Key",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text",
+                                "required": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "from",
+                        "label": "From",
+                        "type": "text"
+                    },
+                    {
+                        "name": "html",
+                        "label": "Content",
+                        "type": "text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 59,
+            "module": "email:ActionSendEmail",
+            "version": 7,
+            "parameters": {
+                "account": 1259468,
+                "saveAfterSent": false
+            },
+            "mapper": {
+                "to": [
+                    "{{40.`6`}}"
+                ],
+                "subject": "Offer Model {{40.`14`}}",
+                "contentType": "html",
+                "attachments": [
+                    {
+                        "fileName": "{{43.fileName}}",
+                        "data": "{{43.data}}",
+                        "cid": ""
+                    }
+                ],
+                "cc": [],
+                "bcc": [],
+                "from": "",
+                "sender": "",
+                "replyTo": "",
+                "inReplyTo": "",
+                "references": [],
+                "priority": "normal",
+                "headers": [],
+                "html": "Dear Customer {{40.`2`}} {{40.`3`}},\n\nEnclosed, you will find our offer for the model {{40.`14`}} you solicited. \n\nPlease, send me an email back with your decision, whether you would accept the offer, would like a second offer, or would not like any offer.\n\nIn case you agree to the offer, please click the following link to virtually sign the offer:\n\nhttps://virabile.myhostpoint.ch/identification.php\n\nThank you, I am looking forward to hearing from you again.\n\nBest regards,\n\n {{40.`12`}}from {{40.`7`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1197,
+                    "y": -278
+                },
+                "restore": {
+                    "account": {
+                        "label": "My Google Restricted connection (raclettedgbp@gmail.com)"
+                    },
+                    "saveAfterSent": {
+                        "label": "No"
+                    },
+                    "to": {
+                        "mode": "chose",
+                        "items": [
+                            "undefined"
+                        ]
+                    },
+                    "contentType": {
+                        "label": "HTML"
+                    },
+                    "attachments": {
+                        "mode": "chose",
+                        "items": [
+                            "undefined"
+                        ]
+                    },
+                    "cc": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "bcc": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "references": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "priority": {
+                        "label": "Normal"
+                    },
+                    "headers": {
+                        "items": []
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "label": "Connection",
+                        "type": "account",
+                        "required": true
+                    },
+                    {
+                        "name": "saveAfterSent",
+                        "label": "Save message after sending",
+                        "type": "select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "to",
+                        "label": "To",
+                        "type": "array",
+                        "required": true,
+                        "labels": {
+                            "add": "Add a recipient",
+                            "edit": "Edit a recipient"
+                        },
+                        "spec": {
+                            "name": "email",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "subject",
+                        "label": "Subject",
+                        "type": "text"
+                    },
+                    {
+                        "name": "contentType",
+                        "label": "Content Type",
+                        "type": "select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "html",
+                                "text"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "attachments",
+                        "label": "Attachments",
+                        "type": "array",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "label": "File name",
+                                "type": "filename",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "label": "Data",
+                                "type": "buffer",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "label": "Content-ID",
+                                "type": "text"
+                            }
+                        ],
+                        "labels": {
+                            "add": "Add an attachment",
+                            "edit": "Edit an attachment"
+                        }
+                    },
+                    {
+                        "name": "cc",
+                        "label": "Copy recipient",
+                        "type": "array",
+                        "labels": {
+                            "add": "Add a copy recipient",
+                            "edit": "Edit a copy recipient"
+                        },
+                        "spec": {
+                            "name": "email",
+                            "type": "email",
+                            "label": "Email address"
+                        }
+                    },
+                    {
+                        "name": "bcc",
+                        "label": "Blind copy recipient",
+                        "type": "array",
+                        "labels": {
+                            "add": "Add a blind copy recipient",
+                            "edit": "Edit a blind copy recipient"
+                        },
+                        "spec": {
+                            "name": "email",
+                            "type": "email",
+                            "label": "Email address"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "label": "From",
+                        "type": "text"
+                    },
+                    {
+                        "name": "sender",
+                        "label": "Sender",
+                        "type": "text"
+                    },
+                    {
+                        "name": "replyTo",
+                        "label": "Reply-To",
+                        "type": "text"
+                    },
+                    {
+                        "name": "inReplyTo",
+                        "label": "In-Reply-To",
+                        "type": "text"
+                    },
+                    {
+                        "name": "references",
+                        "label": "References",
+                        "type": "array",
+                        "spec": {
+                            "type": "text",
+                            "label": "Reference",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "priority",
+                        "label": "Priority",
+                        "type": "select",
+                        "validate": {
+                            "enum": [
+                                "high",
+                                "normal",
+                                "low"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "label": "Headers",
+                        "type": "array",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "label": "Key",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text",
+                                "required": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "html",
+                        "label": "Content",
+                        "type": "text"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": false,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false
+        },
+        "designer": {
+            "orphans": [],
+            "notes": [
+                {
+                    "id": 47,
+                    "text": "",
+                    "filter": false
+                }
+            ]
+        },
+        "zone": "eu1.integromat.com"
+    }
+}

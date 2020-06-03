@@ -1,0 +1,2804 @@
+{
+    "name": "SirChatAlot_Attila",
+    "flow": [
+        {
+            "id": 2,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 361224,
+                "maxResults": 2
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -540,
+                    "y": 446
+                },
+                "restore": {
+                    "hook": {
+                        "label": "GetChatData"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "responseId",
+                        "type": "text"
+                    },
+                    {
+                        "name": "queryResult",
+                        "spec": [
+                            {
+                                "name": "queryText",
+                                "type": "text"
+                            },
+                            {
+                                "name": "parameters",
+                                "spec": [
+                                    {
+                                        "name": "user_requesttype",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "name": "zip",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "name": "city",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "name": "lastname",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "name": "email",
+                                        "type": "text"
+                                    }
+                                ],
+                                "type": "collection"
+                            },
+                            {
+                                "name": "allRequiredParamsPresent",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "fulfillmentText",
+                                "type": "text"
+                            },
+                            {
+                                "name": "fulfillmentMessages",
+                                "spec": {
+                                    "spec": [
+                                        {
+                                            "name": "text",
+                                            "spec": [
+                                                {
+                                                    "name": "text",
+                                                    "spec": {
+                                                        "type": "text"
+                                                    },
+                                                    "type": "array"
+                                                }
+                                            ],
+                                            "type": "collection"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "name": "outputContexts",
+                                "spec": {
+                                    "spec": [
+                                        {
+                                            "name": "name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "name": "lifespanCount",
+                                            "type": "number"
+                                        },
+                                        {
+                                            "name": "parameters",
+                                            "spec": [
+                                                {
+                                                    "name": "givenName",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "givenName.original",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "user_requesttype",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "user_requesttype.original",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "zip",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "zip.original",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "city",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "city.original",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "lastname",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "lastname.original",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "email",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "email.original",
+                                                    "type": "text"
+                                                }
+                                            ],
+                                            "type": "collection"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "name": "intent",
+                                "spec": [
+                                    {
+                                        "name": "name",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "name": "displayName",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "name": "endInteraction",
+                                        "type": "boolean"
+                                    }
+                                ],
+                                "type": "collection"
+                            },
+                            {
+                                "name": "intentDetectionConfidence",
+                                "type": "number"
+                            },
+                            {
+                                "name": "languageCode",
+                                "type": "text"
+                            }
+                        ],
+                        "type": "collection"
+                    },
+                    {
+                        "name": "originalDetectIntentRequest",
+                        "spec": [
+                            {
+                                "name": "payload",
+                                "spec": [],
+                                "type": "collection"
+                            }
+                        ],
+                        "type": "collection"
+                    },
+                    {
+                        "name": "session",
+                        "type": "text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "filter": {
+                "name": "",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{2.queryResult.intent.displayName}}",
+                            "b": "",
+                            "o": "exist"
+                        }
+                    ]
+                ]
+            },
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 71,
+                    "y": 446
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 18,
+                            "module": "google-sheets:addRow",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1133828
+                            },
+                            "filter": {
+                                "name": "",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.queryResult.intent.displayName}}",
+                                            "b": "",
+                                            "o": "exist"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "mode": "select",
+                                "values": {
+                                    "0": "{{formatDate(now; \"DD.MM.YYYY HH:mm\"; \"Europe/Prague\")}}",
+                                    "1": "{{2.responseId}}",
+                                    "2": "{{2.session}}"
+                                },
+                                "sheetId": "Incoming_Chat",
+                                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck",
+                                "tableFirstRow": "A1:Z1",
+                                "includesHeaders": false,
+                                "insertDataOption": "OVERWRITE",
+                                "valueInputOption": "USER_ENTERED"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": -300
+                                },
+                                "restore": {
+                                    "mode": {
+                                        "label": "Select spreadsheet and sheet"
+                                    },
+                                    "sheetId": {
+                                        "label": "Incoming_Chat"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "GoogleSheet (matthias.mann91@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "label": "Chat_Test_1"
+                                    },
+                                    "tableFirstRow": {
+                                        "label": "A-Z"
+                                    },
+                                    "includesHeaders": {
+                                        "label": "No"
+                                    },
+                                    "insertDataOption": {
+                                        "mode": "chose",
+                                        "label": "Overwrite"
+                                    },
+                                    "valueInputOption": {
+                                        "mode": "chose",
+                                        "label": "User entered"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "mode",
+                                        "type": "select",
+                                        "label": "Mode",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "select",
+                                                "map"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "valueInputOption",
+                                        "type": "select",
+                                        "label": "Value input option",
+                                        "validate": {
+                                            "enum": [
+                                                "USER_ENTERED",
+                                                "RAW"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "insertDataOption",
+                                        "type": "select",
+                                        "label": "Insert data option",
+                                        "validate": {
+                                            "enum": [
+                                                "INSERT_ROWS",
+                                                "OVERWRITE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "includesHeaders",
+                                        "type": "select",
+                                        "label": "Table contains headers",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                true,
+                                                false
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "tableFirstRow",
+                                        "type": "select",
+                                        "label": "Column range",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "A1:Z1",
+                                                "A1:BZ1",
+                                                "A1:CZ1",
+                                                "A1:DZ1",
+                                                "A1:MZ1",
+                                                "A1:ZZ1"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "values",
+                                        "spec": [
+                                            {
+                                                "name": "0",
+                                                "type": "text",
+                                                "label": "A"
+                                            },
+                                            {
+                                                "name": "1",
+                                                "type": "text",
+                                                "label": "B"
+                                            },
+                                            {
+                                                "name": "2",
+                                                "type": "text",
+                                                "label": "C"
+                                            },
+                                            {
+                                                "name": "3",
+                                                "type": "text",
+                                                "label": "D"
+                                            },
+                                            {
+                                                "name": "4",
+                                                "type": "text",
+                                                "label": "E"
+                                            },
+                                            {
+                                                "name": "5",
+                                                "type": "text",
+                                                "label": "F"
+                                            },
+                                            {
+                                                "name": "6",
+                                                "type": "text",
+                                                "label": "G"
+                                            },
+                                            {
+                                                "name": "7",
+                                                "type": "text",
+                                                "label": "H"
+                                            },
+                                            {
+                                                "name": "8",
+                                                "type": "text",
+                                                "label": "I"
+                                            },
+                                            {
+                                                "name": "9",
+                                                "type": "text",
+                                                "label": "J"
+                                            },
+                                            {
+                                                "name": "10",
+                                                "type": "text",
+                                                "label": "K"
+                                            },
+                                            {
+                                                "name": "11",
+                                                "type": "text",
+                                                "label": "L"
+                                            },
+                                            {
+                                                "name": "12",
+                                                "type": "text",
+                                                "label": "M"
+                                            },
+                                            {
+                                                "name": "13",
+                                                "type": "text",
+                                                "label": "N"
+                                            },
+                                            {
+                                                "name": "14",
+                                                "type": "text",
+                                                "label": "O"
+                                            },
+                                            {
+                                                "name": "15",
+                                                "type": "text",
+                                                "label": "P"
+                                            },
+                                            {
+                                                "name": "16",
+                                                "type": "text",
+                                                "label": "Q"
+                                            },
+                                            {
+                                                "name": "17",
+                                                "type": "text",
+                                                "label": "R"
+                                            },
+                                            {
+                                                "name": "18",
+                                                "type": "text",
+                                                "label": "S"
+                                            },
+                                            {
+                                                "name": "19",
+                                                "type": "text",
+                                                "label": "T"
+                                            },
+                                            {
+                                                "name": "20",
+                                                "type": "text",
+                                                "label": "U"
+                                            },
+                                            {
+                                                "name": "21",
+                                                "type": "text",
+                                                "label": "V"
+                                            },
+                                            {
+                                                "name": "22",
+                                                "type": "text",
+                                                "label": "W"
+                                            },
+                                            {
+                                                "name": "23",
+                                                "type": "text",
+                                                "label": "X"
+                                            },
+                                            {
+                                                "name": "24",
+                                                "type": "text",
+                                                "label": "Y"
+                                            },
+                                            {
+                                                "name": "25",
+                                                "type": "text",
+                                                "label": "Z"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 1,
+                            "module": "google-sheets:addRow",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1133828
+                            },
+                            "filter": {
+                                "name": "",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.queryResult.intent.displayName}}",
+                                            "b": "configureCar",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "mode": "select",
+                                "values": {
+                                    "0": "{{2.session}}",
+                                    "1": "{{formatDate(now; \"DD.MM.YYYY HH:mm\"; \"Europe/Prague\")}}",
+                                    "2": "{{2.queryResult.parameters.users}}",
+                                    "3": "{{2.queryResult.parameters.specialreq}}",
+                                    "4": "{{2.queryResult.parameters.color}}",
+                                    "5": "{{2.queryResult.parameters.motive}}",
+                                    "6": "{{2.queryResult.parameters.traveltype}}",
+                                    "7": "{{2.queryResult.parameters.engine}}"
+                                },
+                                "sheetId": "Incoming_Configuration",
+                                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck",
+                                "includesHeaders": true,
+                                "insertDataOption": "OVERWRITE",
+                                "valueInputOption": "USER_ENTERED"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "mode": {
+                                        "label": "Select spreadsheet and sheet"
+                                    },
+                                    "sheetId": {
+                                        "label": "Incoming_Configuration"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "GoogleSheet (matthias.mann91@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "label": "Chat_Test_1"
+                                    },
+                                    "includesHeaders": {
+                                        "label": "Yes"
+                                    },
+                                    "insertDataOption": {
+                                        "mode": "chose",
+                                        "label": "Overwrite"
+                                    },
+                                    "valueInputOption": {
+                                        "mode": "chose",
+                                        "label": "User entered"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "mode",
+                                        "type": "select",
+                                        "label": "Mode",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "select",
+                                                "map"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "valueInputOption",
+                                        "type": "select",
+                                        "label": "Value input option",
+                                        "validate": {
+                                            "enum": [
+                                                "USER_ENTERED",
+                                                "RAW"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "insertDataOption",
+                                        "type": "select",
+                                        "label": "Insert data option",
+                                        "validate": {
+                                            "enum": [
+                                                "INSERT_ROWS",
+                                                "OVERWRITE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "includesHeaders",
+                                        "type": "select",
+                                        "label": "Table contains headers",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                true,
+                                                false
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "values",
+                                        "spec": [
+                                            {
+                                                "name": "0",
+                                                "type": "text",
+                                                "label": "ID (A)"
+                                            },
+                                            {
+                                                "name": "1",
+                                                "type": "text",
+                                                "label": "DateTime (B)"
+                                            },
+                                            {
+                                                "name": "2",
+                                                "type": "text",
+                                                "label": "Users (C)"
+                                            },
+                                            {
+                                                "name": "3",
+                                                "type": "text",
+                                                "label": "SpecialReq (D)"
+                                            },
+                                            {
+                                                "name": "4",
+                                                "type": "text",
+                                                "label": "Color (E)"
+                                            },
+                                            {
+                                                "name": "5",
+                                                "type": "text",
+                                                "label": "Motive (F)"
+                                            },
+                                            {
+                                                "name": "6",
+                                                "type": "text",
+                                                "label": "TravelType (G)"
+                                            },
+                                            {
+                                                "name": "7",
+                                                "type": "text",
+                                                "label": "Engine (H)"
+                                            },
+                                            {
+                                                "name": "8",
+                                                "type": "text",
+                                                "label": "(I)"
+                                            },
+                                            {
+                                                "name": "9",
+                                                "type": "text",
+                                                "label": "(J)"
+                                            },
+                                            {
+                                                "name": "10",
+                                                "type": "text",
+                                                "label": "(K)"
+                                            },
+                                            {
+                                                "name": "11",
+                                                "type": "text",
+                                                "label": "(L)"
+                                            },
+                                            {
+                                                "name": "12",
+                                                "type": "text",
+                                                "label": "(M)"
+                                            },
+                                            {
+                                                "name": "13",
+                                                "type": "text",
+                                                "label": "(N)"
+                                            },
+                                            {
+                                                "name": "14",
+                                                "type": "text",
+                                                "label": "(O)"
+                                            },
+                                            {
+                                                "name": "15",
+                                                "type": "text",
+                                                "label": "(P)"
+                                            },
+                                            {
+                                                "name": "16",
+                                                "type": "text",
+                                                "label": "(Q)"
+                                            },
+                                            {
+                                                "name": "17",
+                                                "type": "text",
+                                                "label": "(R)"
+                                            },
+                                            {
+                                                "name": "18",
+                                                "type": "text",
+                                                "label": "(S)"
+                                            },
+                                            {
+                                                "name": "19",
+                                                "type": "text",
+                                                "label": "(T)"
+                                            },
+                                            {
+                                                "name": "20",
+                                                "type": "text",
+                                                "label": "(U)"
+                                            },
+                                            {
+                                                "name": "21",
+                                                "type": "text",
+                                                "label": "(V)"
+                                            },
+                                            {
+                                                "name": "22",
+                                                "type": "text",
+                                                "label": "(W)"
+                                            },
+                                            {
+                                                "name": "23",
+                                                "type": "text",
+                                                "label": "(X)"
+                                            },
+                                            {
+                                                "name": "24",
+                                                "type": "text",
+                                                "label": "(Y)"
+                                            },
+                                            {
+                                                "name": "25",
+                                                "type": "text",
+                                                "label": "(Z)"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 10,
+                            "module": "google-sheets:filterRowsAdvanced",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1133828
+                            },
+                            "mapper": {
+                                "tq": "select F\nwhere \"{{2.session}}\" = A",
+                                "sheetId": 1308879627,
+                                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "sheetId": {
+                                        "mode": "chose",
+                                        "label": "ScoringCalc"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "GoogleSheet (matthias.mann91@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "mode": "chose",
+                                        "label": "Chat_Test_1"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "tq",
+                                        "type": "text",
+                                        "label": "Query",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "limit",
+                                        "type": "number",
+                                        "label": "Maximum number of returned rows"
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "__IMTLENGTH__",
+                                        "type": "uinteger",
+                                        "label": "Total number of bundles"
+                                    },
+                                    {
+                                        "name": "__IMTINDEX__",
+                                        "type": "uinteger",
+                                        "label": "Bundle order position"
+                                    },
+                                    {
+                                        "name": "0",
+                                        "type": "text",
+                                        "label": "Recommendation (F)"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 9,
+                            "module": "gateway:WebhookRespond",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "body": "{\n\"fulfillmentText\" : \"Thank you for answering the questions. Based on the requirements analysis, I suggest you the model {{10.`0`}}. Would you like a non-binding offer for a brand new, shiny {{2.queryResult.parameters.color}} {{10.`0`}}? Or would you like to test drive the {{10.`0`}}?\"\n}",
+                                "status": "200",
+                                "headers": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "headers": {
+                                        "items": []
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "status",
+                                        "type": "uinteger",
+                                        "label": "Status",
+                                        "required": true,
+                                        "validate": {
+                                            "min": 100
+                                        }
+                                    },
+                                    {
+                                        "name": "body",
+                                        "type": "any",
+                                        "label": "Body"
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "key",
+                                                "type": "text",
+                                                "label": "Key",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 256
+                                                }
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 4096
+                                                }
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Custom headers",
+                                        "validate": {
+                                            "maxItems": 16
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 31,
+                            "module": "util:SetVariable",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "name": "inquiry",
+                                "scope": "roundtrip",
+                                "value": "configureCar"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "scope": {
+                                        "label": "One cycle"
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "inquiry"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 6,
+                            "module": "google-sheets:addRow",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1133828
+                            },
+                            "filter": {
+                                "name": "",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.queryResult.intent.displayName}}",
+                                            "b": "Testdrive",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "mode": "select",
+                                "values": {
+                                    "0": "{{formatDate(now; \"DD.MM.YYYY HH:mm\"; \"Europe/Prague\")}}",
+                                    "1": "{{2.session}}",
+                                    "2": "{{2.queryResult.outputContexts[].parameters.`givenName.original`}}",
+                                    "3": "{{2.queryResult.parameters.lastname}}",
+                                    "4": "{{2.queryResult.parameters.zip}}",
+                                    "5": "{{2.queryResult.parameters.city}}",
+                                    "6": "{{2.queryResult.parameters.email}}"
+                                },
+                                "sheetId": "Incoming_TestDrive",
+                                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck",
+                                "includesHeaders": true,
+                                "insertDataOption": "OVERWRITE",
+                                "valueInputOption": "USER_ENTERED"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "mode": {
+                                        "label": "Select spreadsheet and sheet"
+                                    },
+                                    "sheetId": {
+                                        "label": "Incoming_TestDrive"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "GoogleSheet (matthias.mann91@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "label": "Chat_Test_1"
+                                    },
+                                    "includesHeaders": {
+                                        "label": "Yes"
+                                    },
+                                    "insertDataOption": {
+                                        "mode": "chose",
+                                        "label": "Overwrite"
+                                    },
+                                    "valueInputOption": {
+                                        "mode": "chose",
+                                        "label": "User entered"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "mode",
+                                        "type": "select",
+                                        "label": "Mode",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "select",
+                                                "map"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "valueInputOption",
+                                        "type": "select",
+                                        "label": "Value input option",
+                                        "validate": {
+                                            "enum": [
+                                                "USER_ENTERED",
+                                                "RAW"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "insertDataOption",
+                                        "type": "select",
+                                        "label": "Insert data option",
+                                        "validate": {
+                                            "enum": [
+                                                "INSERT_ROWS",
+                                                "OVERWRITE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "includesHeaders",
+                                        "type": "select",
+                                        "label": "Table contains headers",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                true,
+                                                false
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "values",
+                                        "spec": [
+                                            {
+                                                "name": "0",
+                                                "type": "text",
+                                                "label": "DateTime (A)"
+                                            },
+                                            {
+                                                "name": "1",
+                                                "type": "text",
+                                                "label": "ChatID (B)"
+                                            },
+                                            {
+                                                "name": "2",
+                                                "type": "text",
+                                                "label": "FirstName (C)"
+                                            },
+                                            {
+                                                "name": "3",
+                                                "type": "text",
+                                                "label": "LastName (D)"
+                                            },
+                                            {
+                                                "name": "4",
+                                                "type": "text",
+                                                "label": "ZIP (E)"
+                                            },
+                                            {
+                                                "name": "5",
+                                                "type": "text",
+                                                "label": "City (F)"
+                                            },
+                                            {
+                                                "name": "6",
+                                                "type": "text",
+                                                "label": "Email (G)"
+                                            },
+                                            {
+                                                "name": "7",
+                                                "type": "text",
+                                                "label": "RecommendDealer (H)"
+                                            },
+                                            {
+                                                "name": "8",
+                                                "type": "text",
+                                                "label": "Index (I)"
+                                            },
+                                            {
+                                                "name": "9",
+                                                "type": "text",
+                                                "label": "Longitude (J)"
+                                            },
+                                            {
+                                                "name": "10",
+                                                "type": "text",
+                                                "label": "Latitude (K)"
+                                            },
+                                            {
+                                                "name": "11",
+                                                "type": "text",
+                                                "label": "(L)"
+                                            },
+                                            {
+                                                "name": "12",
+                                                "type": "text",
+                                                "label": "(M)"
+                                            },
+                                            {
+                                                "name": "13",
+                                                "type": "text",
+                                                "label": "(N)"
+                                            },
+                                            {
+                                                "name": "14",
+                                                "type": "text",
+                                                "label": "(O)"
+                                            },
+                                            {
+                                                "name": "15",
+                                                "type": "text",
+                                                "label": "(P)"
+                                            },
+                                            {
+                                                "name": "16",
+                                                "type": "text",
+                                                "label": "(Q)"
+                                            },
+                                            {
+                                                "name": "17",
+                                                "type": "text",
+                                                "label": "(R)"
+                                            },
+                                            {
+                                                "name": "18",
+                                                "type": "text",
+                                                "label": "(S)"
+                                            },
+                                            {
+                                                "name": "19",
+                                                "type": "text",
+                                                "label": "(T)"
+                                            },
+                                            {
+                                                "name": "20",
+                                                "type": "text",
+                                                "label": "(U)"
+                                            },
+                                            {
+                                                "name": "21",
+                                                "type": "text",
+                                                "label": "(V)"
+                                            },
+                                            {
+                                                "name": "22",
+                                                "type": "text",
+                                                "label": "(W)"
+                                            },
+                                            {
+                                                "name": "23",
+                                                "type": "text",
+                                                "label": "(X)"
+                                            },
+                                            {
+                                                "name": "24",
+                                                "type": "text",
+                                                "label": "(Y)"
+                                            },
+                                            {
+                                                "name": "25",
+                                                "type": "text",
+                                                "label": "(Z)"
+                                            },
+                                            {
+                                                "name": "26",
+                                                "type": "text",
+                                                "label": "(AA)"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 16,
+                            "module": "google-sheets:filterRowsAdvanced",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1133828
+                            },
+                            "mapper": {
+                                "tq": "select H where \"{{2.session}}\" = B",
+                                "sheetId": 1366392246,
+                                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 600
+                                },
+                                "restore": {
+                                    "sheetId": {
+                                        "mode": "chose",
+                                        "label": "Incoming_TestDrive"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "GoogleSheet (matthias.mann91@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "mode": "chose",
+                                        "label": "Chat_Test_1"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "tq",
+                                        "type": "text",
+                                        "label": "Query",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "limit",
+                                        "type": "number",
+                                        "label": "Maximum number of returned rows"
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "__IMTLENGTH__",
+                                        "type": "uinteger",
+                                        "label": "Total number of bundles"
+                                    },
+                                    {
+                                        "name": "__IMTINDEX__",
+                                        "type": "uinteger",
+                                        "label": "Bundle order position"
+                                    },
+                                    {
+                                        "name": "0",
+                                        "type": "text",
+                                        "label": "RecommendDealer (H)"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 17,
+                            "module": "gateway:WebhookRespond",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "body": "{\"fulfillmentText\" : \"Thank you for submitting your contact details, {{2.queryResult.outputContexts[].parameters.`givenName.original`}}  {{2.queryResult.outputContexts[].parameters.`lastname.original`}}. You will be shortly contacted by {{16.`0`}}.\"}",
+                                "status": "200",
+                                "headers": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 600
+                                },
+                                "restore": {
+                                    "headers": {
+                                        "items": []
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "status",
+                                        "type": "uinteger",
+                                        "label": "Status",
+                                        "required": true,
+                                        "validate": {
+                                            "min": 100
+                                        }
+                                    },
+                                    {
+                                        "name": "body",
+                                        "type": "any",
+                                        "label": "Body"
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "key",
+                                                "type": "text",
+                                                "label": "Key",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 256
+                                                }
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 4096
+                                                }
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Custom headers",
+                                        "validate": {
+                                            "maxItems": 16
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 33,
+                            "module": "util:SetVariable",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "name": "inquiry",
+                                "scope": "roundtrip",
+                                "value": "TestDrive"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1504,
+                                    "y": 600
+                                },
+                                "restore": {
+                                    "scope": {
+                                        "label": "One cycle"
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "inquiry"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 29,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "https://digibp-raclette-du-valais.herokuapp.com/rest/message",
+                                "data": "{\"messageName\" : \"Message_Chatbot\",\n\"processVariables\": {\n\"responseid\" : {\"value\" : \"{{2.session}}\", \"type\": \"String\"},      \n\"recommendedmodel\" : {\"value\" : \"{{16.`0`}}\", \"type\": \"String\"} \n}\n}\n",
+                                "gzip": true,
+                                "method": "post",
+                                "headers": [],
+                                "timeout": "",
+                                "authPass": "",
+                                "authUser": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "shareCookies": false,
+                                "parseResponse": false,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "followAllRedirects": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1916,
+                                    "y": 602
+                                },
+                                "restore": {
+                                    "qs": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "method": {
+                                        "mode": "chose",
+                                        "label": "POST"
+                                    },
+                                    "headers": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "bodyType": {
+                                        "label": "Raw"
+                                    },
+                                    "contentType": {
+                                        "label": "JSON (application/json)"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "labels": {
+                                            "add": "Add a header",
+                                            "edit": "Edit a header"
+                                        }
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "labels": {
+                                            "add": "Add parameter",
+                                            "edit": "Edit parameter"
+                                        }
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 12,
+                            "module": "google-sheets:addRow",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1133828
+                            },
+                            "filter": {
+                                "name": "",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.queryResult.intent.displayName}}",
+                                            "b": "offer_inquiry",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "mode": "select",
+                                "values": {
+                                    "0": "{{formatDate(now; \"DD.MM.YYYY HH:mm\"; \"Europe/Prague\")}}",
+                                    "1": "{{2.session}}",
+                                    "2": "{{2.queryResult.outputContexts[].parameters.`givenName.original`}}",
+                                    "3": "{{2.queryResult.outputContexts[].parameters.`lastname.original`}}",
+                                    "4": "{{2.queryResult.parameters.zip}}",
+                                    "5": "{{2.queryResult.parameters.city}}",
+                                    "6": "{{2.queryResult.parameters.email}}"
+                                },
+                                "sheetId": "Incoming_OfferInquiry",
+                                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck",
+                                "includesHeaders": true,
+                                "insertDataOption": "OVERWRITE",
+                                "valueInputOption": "USER_ENTERED"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 600,
+                                    "y": 600
+                                },
+                                "restore": {
+                                    "mode": {
+                                        "label": "Select spreadsheet and sheet"
+                                    },
+                                    "sheetId": {
+                                        "label": "Incoming_OfferInquiry"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "GoogleSheet (matthias.mann91@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "label": "Chat_Test_1"
+                                    },
+                                    "includesHeaders": {
+                                        "label": "Yes"
+                                    },
+                                    "insertDataOption": {
+                                        "mode": "chose",
+                                        "label": "Overwrite"
+                                    },
+                                    "valueInputOption": {
+                                        "mode": "chose",
+                                        "label": "User entered"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "mode",
+                                        "type": "select",
+                                        "label": "Mode",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "select",
+                                                "map"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "valueInputOption",
+                                        "type": "select",
+                                        "label": "Value input option",
+                                        "validate": {
+                                            "enum": [
+                                                "USER_ENTERED",
+                                                "RAW"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "insertDataOption",
+                                        "type": "select",
+                                        "label": "Insert data option",
+                                        "validate": {
+                                            "enum": [
+                                                "INSERT_ROWS",
+                                                "OVERWRITE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "includesHeaders",
+                                        "type": "select",
+                                        "label": "Table contains headers",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                true,
+                                                false
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "values",
+                                        "spec": [
+                                            {
+                                                "name": "0",
+                                                "type": "text",
+                                                "label": "DateTime (A)"
+                                            },
+                                            {
+                                                "name": "1",
+                                                "type": "text",
+                                                "label": "ChatID (B)"
+                                            },
+                                            {
+                                                "name": "2",
+                                                "type": "text",
+                                                "label": "FirstName (C)"
+                                            },
+                                            {
+                                                "name": "3",
+                                                "type": "text",
+                                                "label": "LastName (D)"
+                                            },
+                                            {
+                                                "name": "4",
+                                                "type": "text",
+                                                "label": "ZIP (E)"
+                                            },
+                                            {
+                                                "name": "5",
+                                                "type": "text",
+                                                "label": "City (F)"
+                                            },
+                                            {
+                                                "name": "6",
+                                                "type": "text",
+                                                "label": "Email (G)"
+                                            },
+                                            {
+                                                "name": "7",
+                                                "type": "text",
+                                                "label": "RecommendDealer (H)"
+                                            },
+                                            {
+                                                "name": "8",
+                                                "type": "text",
+                                                "label": "Index (I)"
+                                            },
+                                            {
+                                                "name": "9",
+                                                "type": "text",
+                                                "label": "Longitude (J)"
+                                            },
+                                            {
+                                                "name": "10",
+                                                "type": "text",
+                                                "label": "Latitude (K)"
+                                            },
+                                            {
+                                                "name": "11",
+                                                "type": "text",
+                                                "label": "(L)"
+                                            },
+                                            {
+                                                "name": "12",
+                                                "type": "text",
+                                                "label": "(M)"
+                                            },
+                                            {
+                                                "name": "13",
+                                                "type": "text",
+                                                "label": "(N)"
+                                            },
+                                            {
+                                                "name": "14",
+                                                "type": "text",
+                                                "label": "(O)"
+                                            },
+                                            {
+                                                "name": "15",
+                                                "type": "text",
+                                                "label": "(P)"
+                                            },
+                                            {
+                                                "name": "16",
+                                                "type": "text",
+                                                "label": "(Q)"
+                                            },
+                                            {
+                                                "name": "17",
+                                                "type": "text",
+                                                "label": "(R)"
+                                            },
+                                            {
+                                                "name": "18",
+                                                "type": "text",
+                                                "label": "(S)"
+                                            },
+                                            {
+                                                "name": "19",
+                                                "type": "text",
+                                                "label": "(T)"
+                                            },
+                                            {
+                                                "name": "20",
+                                                "type": "text",
+                                                "label": "(U)"
+                                            },
+                                            {
+                                                "name": "21",
+                                                "type": "text",
+                                                "label": "(V)"
+                                            },
+                                            {
+                                                "name": "22",
+                                                "type": "text",
+                                                "label": "(W)"
+                                            },
+                                            {
+                                                "name": "23",
+                                                "type": "text",
+                                                "label": "(X)"
+                                            },
+                                            {
+                                                "name": "24",
+                                                "type": "text",
+                                                "label": "(Y)"
+                                            },
+                                            {
+                                                "name": "25",
+                                                "type": "text",
+                                                "label": "(Z)"
+                                            },
+                                            {
+                                                "name": "26",
+                                                "type": "text",
+                                                "label": "(AA)"
+                                            },
+                                            {
+                                                "name": "27",
+                                                "type": "text",
+                                                "label": "(AB)"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 14,
+                            "module": "google-sheets:filterRowsAdvanced",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1133828
+                            },
+                            "mapper": {
+                                "tq": "select H where \"{{2.session}}\" = B",
+                                "sheetId": 1872859740,
+                                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 900
+                                },
+                                "restore": {
+                                    "sheetId": {
+                                        "mode": "chose",
+                                        "label": "Incoming_OfferInquiry"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "GoogleSheet (matthias.mann91@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "mode": "chose",
+                                        "label": "Chat_Test_1"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "tq",
+                                        "type": "text",
+                                        "label": "Query",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "limit",
+                                        "type": "number",
+                                        "label": "Maximum number of returned rows"
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "__IMTLENGTH__",
+                                        "type": "uinteger",
+                                        "label": "Total number of bundles"
+                                    },
+                                    {
+                                        "name": "__IMTINDEX__",
+                                        "type": "uinteger",
+                                        "label": "Bundle order position"
+                                    },
+                                    {
+                                        "name": "0",
+                                        "type": "text",
+                                        "label": "RecommendDealer (H)"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 15,
+                            "module": "gateway:WebhookRespond",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "body": "{\"fulfillmentText\" : \"Thank you for submitting your contact details {{2.queryResult.outputContexts[].parameters.`givenName.original`}} {{2.queryResult.outputContexts[].parameters.`lastname.original`}}. You will be shortly contacted by {{14.`0`}}.\"}",
+                                "status": "200",
+                                "headers": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 900
+                                },
+                                "restore": {
+                                    "headers": {
+                                        "items": []
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "status",
+                                        "type": "uinteger",
+                                        "label": "Status",
+                                        "required": true,
+                                        "validate": {
+                                            "min": 100
+                                        }
+                                    },
+                                    {
+                                        "name": "body",
+                                        "type": "any",
+                                        "label": "Body"
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "key",
+                                                "type": "text",
+                                                "label": "Key",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 256
+                                                }
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 4096
+                                                }
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Custom headers",
+                                        "validate": {
+                                            "maxItems": 16
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 32,
+                            "module": "util:SetVariable",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "name": "offer",
+                                "scope": "roundtrip",
+                                "value": "Recommendation"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1506,
+                                    "y": 907
+                                },
+                                "restore": {
+                                    "scope": {
+                                        "label": "One cycle"
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Variable name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "Variable value"
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "value",
+                                        "type": "any",
+                                        "label": "offer"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 44,
+                            "module": "google-sheets:filterRowsAdvanced",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1133828
+                            },
+                            "mapper": {
+                                "tq": "select F\nwhere \"{{2.session}}\" = A",
+                                "sheetId": 1308879627,
+                                "spreadsheetId": "1JpWhWYpcWBvpYqHCFBWu7er_CU6VIyxNyrtPFzVG_Ck"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1780,
+                                    "y": 902
+                                },
+                                "restore": {
+                                    "sheetId": {
+                                        "mode": "chose",
+                                        "label": "ScoringCalc"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "GoogleSheet (matthias.mann91@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "mode": "chose",
+                                        "label": "Chat_Test_1"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "tq",
+                                        "type": "text",
+                                        "label": "Query",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "limit",
+                                        "type": "number",
+                                        "label": "Maximum number of returned rows"
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "__IMTLENGTH__",
+                                        "type": "uinteger",
+                                        "label": "Total number of bundles"
+                                    },
+                                    {
+                                        "name": "__IMTINDEX__",
+                                        "type": "uinteger",
+                                        "label": "Bundle order position"
+                                    },
+                                    {
+                                        "name": "0",
+                                        "type": "text",
+                                        "label": "Recommendation (F)"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 21,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "https://digibp-raclette-du-valais.herokuapp.com/rest/message",
+                                "data": "{\"messageName\" : \"Message_Chatbot\",\n\"processVariables\": {\n\"responseid\" : {\"value\" : \"{{2.session}}\", \"type\": \"String\"},      \n\"recommendedmodel \" : {\"value\" : \"{{44.`0`}}\", \"type\": \"String\"} \n}\n}\n",
+                                "gzip": true,
+                                "method": "post",
+                                "headers": [],
+                                "timeout": "",
+                                "authPass": "",
+                                "authUser": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "shareCookies": false,
+                                "parseResponse": false,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "followAllRedirects": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2063,
+                                    "y": 904
+                                },
+                                "restore": {
+                                    "qs": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "method": {
+                                        "mode": "chose",
+                                        "label": "POST"
+                                    },
+                                    "headers": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "bodyType": {
+                                        "label": "Raw"
+                                    },
+                                    "contentType": {
+                                        "label": "JSON (application/json)"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "labels": {
+                                            "add": "Add a header",
+                                            "edit": "Edit a header"
+                                        }
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "labels": {
+                                            "add": "Add parameter",
+                                            "edit": "Edit parameter"
+                                        }
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": false,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false
+        },
+        "designer": {
+            "orphans": [
+                [
+                    {
+                        "id": 30,
+                        "module": "http:ActionSendData",
+                        "version": 3,
+                        "parameters": {
+                            "handleErrors": false
+                        },
+                        "mapper": {
+                            "ca": "",
+                            "qs": [],
+                            "url": "https://digibp-raclette-du-valais.herokuapp.com/rest/message",
+                            "data": "{\"messageName\" : \"Message_Chatbot\",\n\"processVariables\": {\n\"responseid\" : {\"value\" : \"{{2.session}}\", \"type\": \"String\"},      \n\"recommendedmodel\" : {\"value\" : \"{{10.`0`}}\", \"type\": \"String\"} \n}\n}\n",
+                            "gzip": true,
+                            "method": "post",
+                            "headers": [],
+                            "timeout": "",
+                            "authPass": "",
+                            "authUser": "",
+                            "bodyType": "raw",
+                            "contentType": "application/json",
+                            "shareCookies": false,
+                            "parseResponse": false,
+                            "followRedirect": true,
+                            "useQuerystring": false,
+                            "followAllRedirects": false,
+                            "rejectUnauthorized": true
+                        },
+                        "metadata": {
+                            "designer": {
+                                "x": 1800,
+                                "y": 300,
+                                "messages": [
+                                    {
+                                        "category": "reference",
+                                        "severity": "warning",
+                                        "message": "Referenced module 'Webhooks - Custom webhook' [2] is not accessible."
+                                    },
+                                    {
+                                        "category": "reference",
+                                        "severity": "warning",
+                                        "message": "Referenced module 'Google Sheets - Search Rows (Advanced)' [10] is not accessible."
+                                    },
+                                    {
+                                        "category": "link",
+                                        "severity": "warning",
+                                        "message": "The module is not connected to the data flow."
+                                    }
+                                ]
+                            },
+                            "restore": {
+                                "qs": {
+                                    "mode": "chose",
+                                    "items": []
+                                },
+                                "method": {
+                                    "mode": "chose",
+                                    "label": "POST"
+                                },
+                                "headers": {
+                                    "mode": "chose",
+                                    "items": []
+                                },
+                                "bodyType": {
+                                    "label": "Raw"
+                                },
+                                "contentType": {
+                                    "label": "JSON (application/json)"
+                                }
+                            },
+                            "parameters": [
+                                {
+                                    "name": "handleErrors",
+                                    "type": "boolean",
+                                    "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                    "required": true
+                                }
+                            ],
+                            "expect": [
+                                {
+                                    "name": "url",
+                                    "type": "url",
+                                    "label": "URL",
+                                    "required": true
+                                },
+                                {
+                                    "name": "method",
+                                    "type": "select",
+                                    "label": "Method",
+                                    "required": true,
+                                    "validate": {
+                                        "enum": [
+                                            "get",
+                                            "head",
+                                            "post",
+                                            "put",
+                                            "patch",
+                                            "delete"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "name": "headers",
+                                    "spec": [
+                                        {
+                                            "name": "name",
+                                            "type": "text",
+                                            "label": "Name",
+                                            "required": true
+                                        },
+                                        {
+                                            "name": "value",
+                                            "type": "text",
+                                            "label": "Value"
+                                        }
+                                    ],
+                                    "type": "array",
+                                    "label": "Headers",
+                                    "labels": {
+                                        "add": "Add a header",
+                                        "edit": "Edit a header"
+                                    }
+                                },
+                                {
+                                    "name": "qs",
+                                    "spec": [
+                                        {
+                                            "name": "name",
+                                            "type": "text",
+                                            "label": "Name",
+                                            "required": true
+                                        },
+                                        {
+                                            "name": "value",
+                                            "type": "text",
+                                            "label": "Value"
+                                        }
+                                    ],
+                                    "type": "array",
+                                    "label": "Query String",
+                                    "labels": {
+                                        "add": "Add parameter",
+                                        "edit": "Edit parameter"
+                                    }
+                                },
+                                {
+                                    "name": "bodyType",
+                                    "type": "select",
+                                    "label": "Body type",
+                                    "validate": {
+                                        "enum": [
+                                            "raw",
+                                            "x_www_form_urlencoded",
+                                            "multipart_form_data"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "name": "parseResponse",
+                                    "type": "boolean",
+                                    "label": "Parse response",
+                                    "required": true
+                                },
+                                {
+                                    "name": "authUser",
+                                    "type": "text",
+                                    "label": "User name"
+                                },
+                                {
+                                    "name": "authPass",
+                                    "type": "password",
+                                    "label": "Password"
+                                },
+                                {
+                                    "name": "timeout",
+                                    "type": "uinteger",
+                                    "label": "Timeout",
+                                    "validate": {
+                                        "max": 300,
+                                        "min": 1
+                                    }
+                                },
+                                {
+                                    "name": "shareCookies",
+                                    "type": "boolean",
+                                    "label": "Share cookies with other HTTP modules",
+                                    "required": true
+                                },
+                                {
+                                    "name": "ca",
+                                    "type": "cert",
+                                    "label": "Self-signed certificate",
+                                    "multiline": true
+                                },
+                                {
+                                    "name": "rejectUnauthorized",
+                                    "type": "boolean",
+                                    "label": "Reject connections that are using unverified (self-signed) certificates",
+                                    "required": true
+                                },
+                                {
+                                    "name": "followRedirect",
+                                    "type": "boolean",
+                                    "label": "Follow redirect",
+                                    "required": true
+                                },
+                                {
+                                    "name": "useQuerystring",
+                                    "type": "boolean",
+                                    "label": "Disable serialization of multiple same query string keys as arrays",
+                                    "required": true
+                                },
+                                {
+                                    "name": "gzip",
+                                    "type": "boolean",
+                                    "label": "Request compressed content",
+                                    "required": true
+                                },
+                                {
+                                    "name": "contentType",
+                                    "type": "select",
+                                    "label": "Content type",
+                                    "validate": {
+                                        "enum": [
+                                            "text/plain",
+                                            "application/json",
+                                            "application/xml",
+                                            "text/xml",
+                                            "text/html",
+                                            "custom"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "name": "data",
+                                    "type": "buffer",
+                                    "label": "Request content"
+                                },
+                                {
+                                    "name": "followAllRedirects",
+                                    "type": "boolean",
+                                    "label": "Follow all redirect",
+                                    "required": true
+                                }
+                            ]
+                        }
+                    }
+                ]
+            ]
+        },
+        "zone": "eu1.integromat.com"
+    }
+}
