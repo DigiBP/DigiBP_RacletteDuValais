@@ -135,7 +135,7 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">https://hook.integromat.com/58y8wwb7m9ip3yj51y9j75uvtxpn6w5b?session=${responseid}</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/zrcbbz059vroj2fjrub6hn5up4k5ulit?session=${responseid}</camunda:inputParameter>
             <camunda:outputParameter name="Recommendation">
               <camunda:script scriptFormat="JavaScript">object=JSON.parse(response);
 Recommendation=object.Chat_Test_1;</camunda:script>
